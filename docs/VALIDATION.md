@@ -1,5 +1,17 @@
 # Local validation
 
+## 0.5.0-dev.5 saved-design API/UI preparation — 2026-10-17
+
+`npm.cmd run check` passed: **114 Node/DOM/database tests** (12 draft, 20 auth/build guard, 11 portal policy, 9 MFA, 25 database, 17 Customer, 14 saved-design/SDK/SQL and 6 library component), **3 Deno HTTP denial tests**, all three Edge entrypoint typechecks, production build, **24 original assets** and **17 browser tests** (38.5s, no failures/retries). Audit: **0 vulnerabilities**. Follow-up library component checks also pass after clearing all confirmation/name state on permission loss.
+
+The new API tests combine actual JOSE verification with generated fixture keys, SQL ownership/RLS/revision operations in PostgreSQL/WASM, and the actual Supabase JS query adapter against a controlled HTTP transport. They verify 390 option combinations, rejected identity/price metadata, invalid schemas/quantities, fixed bounded pages, cross-user denial, stale edits/deletes, current account/role denials, exact CORS/body bounds, redacted failures and disabled runtime. This is not a live PostgREST/gateway/provider test or genuine parallel database-session test.
+
+Component tests cover explicit replace/delete confirmation and cancel, server revisions, conflict preservation, no silent retry, in-flight duplicate suppression, edited-bouquet preservation, unmount invalidation and permission-state clearing. They inject only a component callback; no mock login/fixture token is accepted by the application. Browser tests additionally verify the compiled unconfigured account panel has no save controls or Edge requests while local drafts work.
+
+Initial fixture timestamp types and DOM assertion diagnostics were corrected before final passing runs; an earlier worker memory failure is not counted as a pass. Evidence: `qa/v0.5.0-dev.5-browser-results.json`, `qa/v0.5.0-dev.5-database.tap`, mobile account-pending screenshot and version-prefixed portal/Studio images. Existing 3D chunk warning remains.
+
+No schema/backend deployment or real account save is claimed. The frontend deployment forces readiness false. Read `supabase/functions/saved-designs/README.md` for required public server key, RLS/ownership contract, bounded offset-page limitations and non-idempotent create retry caveat. Real project trust, SDK/account switching, revocation propagation, deployed rate limits and initial Admin enrollment/recovery remain release blockers.
+
 ## GitHub/Vercel delivery verification — 2026-10-17
 
 Owner authorized delivery to `sych-13/twistfuzz` and Vercel. First cloud `npm ci` failed because `@opentelemetry/api@1.9.1` was missing from the optional dependency tree in the lockfile. Explicitly pinned that development dependency; local clean install then passed and cloud retry reached **READY** in 38s at commit `968e57c`.

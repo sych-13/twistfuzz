@@ -5,6 +5,7 @@ import BouquetPreview from '../three/BouquetPreview';
 import { changeStem, colorName, defaultDesign, flowerKinds, flowerPalette, MAX_STEMS, ribbons, totalStems, wrappers } from './design';
 import type { BouquetDesign, FlowerKind } from './design';
 import { clearDraft, DRAFT_KEY, loadDraft, saveDraft } from './drafts';
+import AccountDesigns from './AccountDesigns';
 
 const initialColors: Record<FlowerKind, string> = {
   Tulip: flowerPalette.Tulip.Pink, Daisy: flowerPalette.Daisy.White,
@@ -132,6 +133,7 @@ export default function Studio() {
           </li>)}</ul> : <p>No stems yet. Choose a flower and add a stem to begin.</p>}
           <dl><div><dt>Wrapper</dt><dd>{design.wrapper}</dd></div><div><dt>Ribbon</dt><dd>{design.ribbon}</dd></div><div><dt>Message card</dt><dd>{design.messageCard ? 'Included' : 'Not selected'}</dd></div></dl>
         </section>
+        <AccountDesigns design={design} onOpen={setDesign} />
     </div>
   </main>;
 }

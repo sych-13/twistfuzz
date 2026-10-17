@@ -1,6 +1,6 @@
 # TWISTFUZZ Bloom Studio — Elegant Garden v0.4
 
-Current working package: **0.5.0-dev.4**, local authentication/MFA, verified Customer onboarding and database ownership/RLS preparation. Latest fully validated milestone: **v0.4**. V0.5 is not released or enabled against live projects. See [progress in Filipino](docs/PROGRESS.md), [actual validation](docs/VALIDATION.md) and [continuation checkpoint](docs/DEVELOPMENT_CHECKPOINT.md).
+Current working package: **0.5.0-dev.5**, local authentication/MFA, verified Customer onboarding and per-Customer saved-design API/UI preparation. Latest fully validated milestone: **v0.4**. V0.5 is not released or enabled against live projects. See [progress in Filipino](docs/PROGRESS.md), [actual validation](docs/VALIDATION.md) and [continuation checkpoint](docs/DEVELOPMENT_CHECKPOINT.md).
 
 Continued from the existing v0.3 source. The approved Elegant Garden theme, official logo, campaign assets and original product references are preserved.
 
@@ -15,6 +15,7 @@ Continued from the existing v0.3 source. The approved Elegant Garden theme, offi
 - Reset returns to the original five-stem design while keeping the saved draft. Reloading starts with the original design; use **Reopen saved draft** to restore saved work. Unsaved edits are not automatically stored.
 - Drafts are shared by anyone using the same browser profile and origin, do not sync across devices or accounts, and can be lost when browser data is cleared. No personal message, account data, prices or permissions are stored in drafts.
 - Design summary, named color buttons, keyboard focus, live notices, storage failure handling and a fallback when 3D rendering is unavailable.
+- **V0.5-dev.5:** account-design panel in the Studio with create/list/open/update/delete, names, revision conflicts, confirmation and pagination. It stays explicitly pending in the hosted preview. The verified server endpoint is locally tested, not deployed; real account storage is unavailable until Firebase/Supabase integration passes. Browser-local drafts keep working independently. See `supabase/functions/saved-designs/README.md`.
 
 The 3D bouquet remains a procedural prototype, not final sculpted chenille/fuzzy-wire models. Palette options do not assert real inventory availability.
 

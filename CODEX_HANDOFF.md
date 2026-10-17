@@ -2,7 +2,7 @@
 
 **Date:** 2026-10-16  
 **Latest complete local source:** v0.4, *Elegant Garden* (continued from this v0.3 handoff)  
-**Working prerelease:** `0.5.0-dev.4` — tested local authentication/MFA, verified Customer onboarding and database ownership/RLS candidate; live integration still gated.  
+**Working prerelease:** `0.5.0-dev.5` — tested local authentication/MFA, Customer onboarding and saved-design API/UI; live backend integration still gated.
 **Development status:** Local development resumed by owner on 2026-10-16. V0.3 and V0.4 validation results are in `docs/CHANGELOG.md` and `docs/VALIDATION.md`. V0.5 requires Firebase/Supabase configuration and security integration validation. No public deployment or real payments enabled.
 
 **Hosting update (2026-10-17):** Owner subsequently authorized GitHub + Vercel delivery. Source is now on `sych-13/twistfuzz`; the existing Vercel project is Git-connected and a protected preview of commit `968e57c` passed 12 hosted checks. See `docs/DEPLOYMENT.md`. Authentication/payments remain disabled and V0.5 is incomplete.

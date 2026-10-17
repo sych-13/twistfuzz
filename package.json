@@ -1,6 +1,6 @@
 {
   "name": "twistfuzz-bloom-studio",
-  "version": "0.5.0-dev.4",
+  "version": "0.5.0-dev.5",
   "private": true,
   "type": "module",
   "scripts": {
@@ -11,15 +11,16 @@
     "test:assets": "node tests/check-assets.mjs",
     "test:e2e": "tsx --tsconfig tsconfig.app.json tests/capture-auth-ui.tsx && playwright test",
     "test:unit": "node --experimental-strip-types --test tests/drafts.test.mjs",
-    "test": "npm run test:unit && npm run test:auth && npm run test:auth-flow && npm run test:auth-ui && npm run test:database && npm run test:customer && npm run test:assets",
+    "test": "npm run test:unit && npm run test:auth && npm run test:auth-flow && npm run test:auth-ui && npm run test:database && npm run test:customer && npm run test:designs && npm run test:assets",
     "check": "npm test && npm run check:edge && npm run test:edge && npm run build && npm run test:e2e",
     "test:auth": "node --experimental-strip-types --test tests/auth.test.mjs tests/build-guard.test.mjs",
-    "check:edge": "deno check --config supabase/functions/deno.json supabase/functions/resolve-role/index.ts supabase/functions/provision-customer/index.ts",
+    "check:edge": "deno check --config supabase/functions/deno.json supabase/functions/resolve-role/index.ts supabase/functions/provision-customer/index.ts supabase/functions/saved-designs/index.ts",
     "test:edge": "deno test --allow-env --allow-net=127.0.0.1 --config supabase/functions/deno.json tests/edge-smoke.test.ts",
     "test:auth-flow": "node --experimental-strip-types --test tests/auth-flow.test.mjs",
     "test:auth-ui": "tsx --tsconfig tsconfig.app.json --test tests/auth-ui.test.tsx",
     "test:database": "node tests/run-database.mjs",
-    "test:customer": "node --experimental-strip-types --test tests/customer-provisioning.test.mjs tests/customer-client.test.mjs"
+    "test:customer": "node --experimental-strip-types --test tests/customer-provisioning.test.mjs tests/customer-client.test.mjs",
+    "test:designs": "node --experimental-strip-types --test tests/saved-designs.test.mjs && tsx --tsconfig tsconfig.app.json --test tests/saved-designs-ui.test.tsx"
   },
   "dependencies": {
     "@react-three/drei": "^10.0.0",

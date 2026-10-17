@@ -21,7 +21,7 @@ Ownership is enforced by both permissive and restrictive `USING`/`WITH CHECK` po
 
 ## Saved-design data
 
-The proposed `custom_designs` additions are `name`, `updated_at` and a server-maintained `revision`. A trigger preserves identity and increments revisions on updates. Application save endpoints must require an expected revision, include owner identity in every lookup/update/delete and report a conflict when an editor's revision is stale. The local test demonstrates the SQL compare-and-set contract; a network API and its UI are still to be implemented.
+The proposed `custom_designs` additions are `name`, `updated_at` and a server-maintained `revision`. A trigger preserves identity and increments revisions on updates. The locally implemented `saved-designs` endpoint requires an expected revision for update/delete, includes owner identity in every data operation and reports a generic conflict for stale/inaccessible records. Its request-scoped public-key/user-token client retains RLS. The Studio account panel uses this contract. Neither the endpoint nor schema has been deployed/live validated; see `supabase/functions/saved-designs/README.md`.
 
 The database bouquet validator is deliberately strict: only flowers, wrapper, ribbon and the existing message-card option are stored. Its option parity is tested against all 390 combinations from the current frontend model. Later approved schema/options must update both validators and their compatibility rules. These records are saved designs, not orders or stock reservations, and do not assert price/inventory availability.
 
