@@ -1,0 +1,12 @@
+{
+  "imports": {
+    "jose": "npm:jose@6.2.12",
+    "firebase-admin/app": "npm:firebase-admin@14.5.0/app",
+    "firebase-admin/auth": "npm:firebase-admin@14.5.0/auth",
+    "@supabase/supabase-js": "npm:@supabase/supabase-js@2.118.0"
+  },
+  "compilerOptions": {
+    "strict": true
+  },
+  "nodeModulesDir": "manual"
+}

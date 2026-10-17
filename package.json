@@ -1,0 +1,57 @@
+{
+  "name": "twistfuzz-bloom-studio",
+  "version": "0.5.0-dev.4",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 0.0.0.0",
+    "build": "tsc -b && vite build",
+    "build:preview": "node scripts/build-preview.mjs",
+    "preview": "vite preview --host 0.0.0.0",
+    "test:assets": "node tests/check-assets.mjs",
+    "test:e2e": "tsx --tsconfig tsconfig.app.json tests/capture-auth-ui.tsx && playwright test",
+    "test:unit": "node --experimental-strip-types --test tests/drafts.test.mjs",
+    "test": "npm run test:unit && npm run test:auth && npm run test:auth-flow && npm run test:auth-ui && npm run test:database && npm run test:customer && npm run test:assets",
+    "check": "npm test && npm run check:edge && npm run test:edge && npm run build && npm run test:e2e",
+    "test:auth": "node --experimental-strip-types --test tests/auth.test.mjs tests/build-guard.test.mjs",
+    "check:edge": "deno check --config supabase/functions/deno.json supabase/functions/resolve-role/index.ts supabase/functions/provision-customer/index.ts",
+    "test:edge": "deno test --allow-env --allow-net=127.0.0.1 --config supabase/functions/deno.json tests/edge-smoke.test.ts",
+    "test:auth-flow": "node --experimental-strip-types --test tests/auth-flow.test.mjs",
+    "test:auth-ui": "tsx --tsconfig tsconfig.app.json --test tests/auth-ui.test.tsx",
+    "test:database": "node tests/run-database.mjs",
+    "test:customer": "node --experimental-strip-types --test tests/customer-provisioning.test.mjs tests/customer-client.test.mjs"
+  },
+  "dependencies": {
+    "@react-three/drei": "^10.0.0",
+    "@react-three/fiber": "^9.1.2",
+    "@supabase/supabase-js": "2.118.0",
+    "firebase": "^11.6.0",
+    "lucide-react": "^0.468.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-router-dom": "^7.5.0",
+    "three": "^0.175.0"
+  },
+  "overrides": {
+    "@firebase/firestore": {
+      "@grpc/grpc-js": "1.13.6"
+    }
+  },
+  "devDependencies": {
+    "@electric-sql/pglite": "0.5.10",
+    "@playwright/test": "1.64.1",
+    "@testing-library/react": "16.3.3",
+    "@types/node": "^22.15.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "@types/three": "^0.175.0",
+    "@vitejs/plugin-react": "^4.4.1",
+    "deno": "2.9.6",
+    "firebase-admin": "14.5.0",
+    "jose": "6.2.12",
+    "jsdom": "29.1.1",
+    "tsx": "4.23.15",
+    "typescript": "~5.8.3",
+    "vite": "^6.3.2"
+  }
+}

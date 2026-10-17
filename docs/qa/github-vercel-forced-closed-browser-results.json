@@ -1,0 +1,203 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "D:\\Downloads\\TWISTFUZZ_Codex_Handoff_v0.3\\TWISTFUZZ_Codex_Handoff_v0.3\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "--grep",
+      "separate portals stay closed|unconfigured portals cannot"
+    ],
+    "configFile": "D:\\Downloads\\TWISTFUZZ_Codex_Handoff_v0.3\\TWISTFUZZ_Codex_Handoff_v0.3\\playwright.config.ts",
+    "rootDir": "D:/Downloads/TWISTFUZZ_Codex_Handoff_v0.3/TWISTFUZZ_Codex_Handoff_v0.3/tests/browser",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "D:/Downloads/TWISTFUZZ_Codex_Handoff_v0.3/TWISTFUZZ_Codex_Handoff_v0.3/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "D:/Downloads/TWISTFUZZ_Codex_Handoff_v0.3/TWISTFUZZ_Codex_Handoff_v0.3/tests/browser",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "filteredProjects": [
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "D:\\Downloads\\TWISTFUZZ_Codex_Handoff_v0.3\\TWISTFUZZ_Codex_Handoff_v0.3\\test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "name": "",
+        "testDir": "D:\\Downloads\\TWISTFUZZ_Codex_Handoff_v0.3\\TWISTFUZZ_Codex_Handoff_v0.3\\tests\\browser",
+        "snapshotDir": "D:\\Downloads\\TWISTFUZZ_Codex_Handoff_v0.3\\TWISTFUZZ_Codex_Handoff_v0.3\\tests\\browser",
+        "testIgnore": [],
+        "testMatch": "**/*.@(spec|test).?(c|m)[jt]s?(x)",
+        "timeout": 30000,
+        "use": {
+          "baseURL": "http://127.0.0.1:4173",
+          "viewport": {
+            "width": 1440,
+            "height": 1000
+          },
+          "trace": "retain-on-failure",
+          "screenshot": "only-on-failure",
+          "launchOptions": {
+            "channel": "msedge",
+            "args": [
+              "--enable-unsafe-swiftshader"
+            ]
+          }
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": ""
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "test-results/browser-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "default",
+    "updateSourceMethod": "patch",
+    "version": "1.64.1",
+    "workers": 1,
+    "webServer": {
+      "command": "npm run preview -- --host 127.0.0.1 --port 4173 --strictPort",
+      "url": "http://127.0.0.1:4173",
+      "reuseExistingServer": false
+    }
+  },
+  "suites": [
+    {
+      "title": "auth.spec.ts",
+      "file": "auth.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "unconfigured portals cannot be enabled by query parameters, local role data or an enrollment URL",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1077,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:12:15.112Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d748ac400d08b85935ef-3218c57f87440d443f48",
+          "file": "auth.spec.ts",
+          "line": 6,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "routes.spec.ts",
+      "file": "routes.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "separate portals stay closed and privileged signup is absent",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1763,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:12:16.509Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "598fdabf36083b33787e-8ba14f67ba3576cb301a",
+          "file": "routes.spec.ts",
+          "line": 26,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-17T04:12:12.417Z",
+    "duration": 6363.798,
+    "expected": 2,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}
