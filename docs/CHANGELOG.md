@@ -7,6 +7,7 @@
 - Initial test fixtures needed JSON timestamp serialization to represent PostgREST. Large DOM-object assertion diagnostics exhausted a test worker's memory; boolean presence assertions corrected that test failure. Final runs pass; these were not bypassed or marked successful while failing.
 - Evidence: `docs/qa/v0.5.0-dev.5-*`. Inspected the mobile account-pending panel. Elegant Garden, all original images/logo, separate portals, pending prices and deferred lead times remain preserved. Deferred 3D bundle warning remains (about 911 kB).
 - V0.5 is still incomplete. Hosted preview exposes only the pending-state panel; real Firebase/Supabase/RLS, Admin enrollment/recovery, provider/account switching, live network/concurrency and deployed rate limits require approved backend setup and validation. Login/checkout/payments remain disabled.
+- Git push `e4a78eb` deployed the frontend successfully: READY in 29.6s, stable Studio/entry/deferred JS HTTP 200, new pending-state account panel verified in served assets. Backend function/schema were not deployed. Evidence: `docs/qa/v0.5.0-dev.5-deployment-results.json`.
 
 ## GitHub/Vercel delivery preparation — V0.5-dev.4 (2026-10-17)
 - Owner explicitly authorized GitHub connection/deployment and selected GitHub + Vercel, identifying existing `sych-13/twistfuzz`. Initialized local Git against the confirmed empty repository and linked the existing `twistfuzz-bloom-preview` Vercel project.

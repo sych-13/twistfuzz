@@ -1,0 +1,20 @@
+{
+  "version": "0.5.0-dev.5",
+  "commit": "e4a78eb41f4f52db62467a1fe139774ba0b14736",
+  "deploymentId": "dpl_C87NHaNWobw5HC4vDmKcu9oYVRNx",
+  "source": "git",
+  "target": "production",
+  "status": "READY",
+  "buildingAt": 1792211539249,
+  "readyAt": 1792211568819,
+  "url": "https://twistfuzz-bloom-preview.vercel.app",
+  "http": {
+    "studio": 200,
+    "entry": 200,
+    "deferredStudio": 200
+  },
+  "accountPanelPresent": true,
+  "pendingSetupCopyPresent": true,
+  "liveAccountSavesValidated": false,
+  "backendDeployed": false
+}
