@@ -4,6 +4,8 @@ Na-update: 17 October 2026. Local package: **0.5.0-dev.4**. Huling kumpletong mi
 
 Nasa [GitHub](https://github.com/sych-13/twistfuzz) na ang source at connected na sa Vercel. Buksan ang [hosted TWISTFUZZ preview](https://twistfuzz-bloom-preview-8jf46vh0o-icarus9963-7076.vercel.app); mag-sign in gamit ang owning Vercel account kung hingin. Pumasa ang 12 hosted checks. Nasa [deployment report](DEPLOYMENT.md) ang eksaktong commit, tests at restrictions.
 
+**Stable website:** [twistfuzz-bloom-preview.vercel.app](https://twistfuzz-bloom-preview.vercel.app). Na-verify na ang automatic deployment mula sa GitHub push `c3063c9`: READY at HTTP 200 sa homepage at direct Studio link. May Vercel access protection pa rin; hindi pa enabled ang real app login o checkout.
+
 | Bahagi | Aktuwal na estado |
 | --- | --- |
 | V0.3 repair | Pumasa ang build, browser, asset at dependency checks. |

@@ -1,0 +1,21 @@
+{
+  "repository": "https://github.com/sych-13/twistfuzz",
+  "branch": "main",
+  "commit": "c3063c9bf807b7b291ab53cb4f5dde66ab7e8439",
+  "projectId": "prj_lm9QugJZK1r3W695aS1QTwjKZraE",
+  "deploymentId": "dpl_BXAFjTTmhT6oMBwRCE7Xf6mmhBzX",
+  "source": "git",
+  "target": "production",
+  "status": "READY",
+  "framework": "vite",
+  "buildingAt": 1792210759103,
+  "readyAt": 1792210789184,
+  "url": "https://twistfuzz-bloom-preview.vercel.app",
+  "exactDeploymentUrl": "https://twistfuzz-bloom-preview-em7b4id3z-icarus9963-7076.vercel.app",
+  "httpChecks": { "exactHomepage": 200, "stableStudio": 200, "spaDocumentsMatch": true },
+  "protectionDisabled": false,
+  "realAuthenticationEnabled": false,
+  "paymentsEnabled": false,
+  "fullBrowserEvidence": { "target": "preview", "file": "vercel-deployed-preview-results.json", "checksPassed": 12 },
+  "liveBackendIntegrationValidated": false
+}

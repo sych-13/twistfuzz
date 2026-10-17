@@ -52,6 +52,8 @@ Only `.env.example` is supplied. No projects have been provisioned or live syste
 
 ## Business and deployment restrictions
 
+**Hosted website:** [TWISTFUZZ Bloom Studio](https://twistfuzz-bloom-preview.vercel.app). GitHub push `c3063c9` automatically deployed successfully and updated this stable alias. Existing Vercel authentication protection remains enabled; use the owning Vercel account if prompted.
+
 Official product/component prices are **pending**; printed numbers in original photos and flyers are **unverified references**. Production lead times remain **deferred**. Checkout and real payments stay disabled. This is not a working commerce system.
 
 On 2026-10-17 the owner authorized GitHub + Vercel delivery. Source is in [sych-13/twistfuzz](https://github.com/sych-13/twistfuzz); a tested [protected Vercel preview](https://twistfuzz-bloom-preview-8jf46vh0o-icarus9963-7076.vercel.app) serves commit `968e57c`. Sign in with the owning Vercel account if prompted. GitHub is connected to the existing Vercel project. See `docs/DEPLOYMENT.md` for exact evidence and limitations. The deployment build forces authentication readiness false; no backend migration or payment activation occurred. Further backend/billable/payment changes require separate approval. The Supabase migration remains an unapplied draft.

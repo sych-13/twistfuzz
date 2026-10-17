@@ -26,3 +26,11 @@ First CLI preview `dpl_Ht3kiVrDpNYiS3TuGe5rTsQjfgEk` failed during cloud `npm ci
 Hosted verification uses the current project's short-lived development OIDC token, loaded locally without printing it. Only requests to the exact preview origin receive the header. No protection setting was disabled; sign in with the owning Vercel account to view the preview normally. Repeat using `node tests/verify-deployed-preview.mjs https://<this-project-preview-host>/` after refreshing local Vercel development authentication.
 
 This is frontend preview delivery, not live Firebase/Supabase integration or a completed V0.5 release. No operational API, real sign-in, MFA enrollment/recovery, account-backed saved-design flow, price/stock/order/payment integration was activated. Existing business restrictions remain unchanged.
+
+## Confirmed Git-triggered delivery
+
+The documentation/evidence push `c3063c9bf807b7b291ab53cb4f5dde66ab7e8439` automatically triggered Vercel through GitHub. Deployment `dpl_BXAFjTTmhT6oMBwRCE7Xf6mmhBzX` reached **READY**, source **git**, target **production**, in approximately **30 seconds**. Build logs confirm cloning the correct repository/main commit, clean install (0 audit vulnerabilities), Vite and `build:preview`. This updates the hosting production alias; it does not turn the application into a production-ready commerce/auth system.
+
+Stable website: [TWISTFUZZ Bloom Studio](https://twistfuzz-bloom-preview.vercel.app). Exact Git deployment: `https://twistfuzz-bloom-preview-em7b4id3z-icarus9963-7076.vercel.app`. Both the exact deployment homepage and stable `/studio` returned **HTTP 200** through authenticated `vercel curl`; their SPA documents match. Provider metadata confirms the stable alias and commit. The 12 full hosted browser checks above were on the separately identified Preview deployment; do not mislabel those as Production browser tests.
+
+Existing project protection remains enabled. The frontend is static with no deployed application Functions, so this delivery has no application Function runtime/drain validation. Broader production monitoring has not been configured or certified. Final hosting metadata/HTTP evidence is in `qa/vercel-git-delivery-results.json`. Follow-up documentation-only pushes can create later deployments with the same application source.
