@@ -4,6 +4,7 @@
 - Added explicit Vite build/output/install settings, a deployment build that forces authentication readiness false, upload/credential exclusions and repository continuation instructions. No homepage redesign, backend activation, payments or new billable resources.
 - Revalidated: **94 local tests + 2 Deno HTTP tests + 16 browser tests (30.0s), 24 original assets, Edge typechecks and build PASS**; audit **0 vulnerabilities**. A supplementary preview build with all public fixture configuration/readiness=true still denied portal access: **2/2 browser checks PASS (6.4s)**. Evidence uses `docs/qa/github-vercel-*`.
 - Initial automatic Git connection required the owner's GitHub Login Connection in Vercel; owner has reported completing it. Push/deploy verification is pending; see `docs/DEPLOYMENT.md` for actual delivery state.
+- Initial GitHub push succeeded (`b5816e7`). First cloud preview failed at `npm ci` because the optional dependency tree lacked `@opentelemetry/api@1.9.1` in the lockfile; pinned it as a development dependency for reproducible clean installation. Retry is pending. Git integration additionally requires the Vercel GitHub App authorization, as reported by the provider.
 
 ## 0.5.0-dev.4 — Verified Customer onboarding, unreleased (2026-10-17)
 - Added a bounded, exact-origin Customer provisioning endpoint and client flow. UID/email come only from a cryptographically verified token and current Firebase account; submitted identity/role fields are rejected. Staff/Admin sign-in never runs public Customer provisioning.
