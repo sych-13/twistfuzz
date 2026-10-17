@@ -37,6 +37,6 @@ Do not deploy that gateway setting independently of the verified handler. It doe
 
 Local tests combine generated RSA-signed token fixtures, the actual handler/verifier and real PostgreSQL/WASM provisioning/audit operations. Firebase current-account/custom-claim behavior is represented by test-only adapters; live Admin SDK calls, claim propagation, PostgREST RPC behavior, provider concurrency, email delivery and deployed rate limits are still unvalidated. These fixtures cannot log into the application.
 
-Owner/Staff provisioning, initial owner MFA enrollment/recovery and account-backed saved-design HTTP/UI flows are separate remaining V0.5 work. No real payments, public deployment or external system changes occurred.
+Owner/Staff provisioning, initial owner MFA enrollment/recovery and complete account-backed saved-design flows remain V0.5 work. The owner-approved free-tier development projects, applied secure foundation and standalone provider/native-trust tests are recorded in `docs/BACKEND_SETUP_PLAN.md`. This function remains undeployed; application gates and payments stay disabled.
 
 References: [Firebase custom claims](https://firebase.google.com/docs/auth/admin/custom-claims), [Supabase Firebase integration](https://supabase.com/docs/guides/auth/third-party/firebase-auth), and [Supabase RPC](https://supabase.com/docs/reference/javascript/rpc).

@@ -1,0 +1,106 @@
+{
+  "checkedAt": "2026-10-17T09:30:10.024Z",
+  "project": {
+    "id": "xoitxpoqejpprjyejgjv",
+    "ref": "xoitxpoqejpprjyejgjv",
+    "organization_id": "ffqjeyyjjnfbsspyfjff",
+    "organization_slug": "ffqjeyyjjnfbsspyfjff",
+    "name": "twistfuzz-dev",
+    "region": "ap-southeast-1",
+    "status": "ACTIVE_HEALTHY",
+    "database": {
+      "host": "db.xoitxpoqejpprjyejgjv.supabase.co",
+      "version": "17.11.0.003",
+      "postgres_engine": "17",
+      "release_channel": "ga"
+    },
+    "created_at": "2026-10-17T07:42:44.208052Z"
+  },
+  "migrations": {
+    "migrations": [
+      {
+        "version": "20261017091937",
+        "name": "twistfuzz_secure_foundation"
+      }
+    ]
+  },
+  "functions": {
+    "functions": []
+  },
+  "security": {
+    "result": {
+      "lints": [
+        {
+          "name": "rls_enabled_no_policy",
+          "title": "RLS Enabled No Policy",
+          "level": "INFO",
+          "facing": "EXTERNAL",
+          "categories": [
+            "SECURITY"
+          ],
+          "description": "Detects cases where row level security (RLS) has been enabled on a table but no RLS policies have been created.",
+          "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0008_rls_enabled_no_policy",
+          "count": 3,
+          "findings": [
+            {
+              "detail": "Table \\`public.audit_events\\` has RLS enabled, but no policies exist",
+              "metadata": {
+                "name": "audit_events",
+                "type": "table",
+                "schema": "public"
+              },
+              "observed_at": "2026-10-17T09:29:48.983Z"
+            },
+            {
+              "detail": "Table \\`public.flower_types\\` has RLS enabled, but no policies exist",
+              "metadata": {
+                "name": "flower_types",
+                "type": "table",
+                "schema": "public"
+              },
+              "observed_at": "2026-10-17T09:29:48.983Z"
+            },
+            {
+              "detail": "Table \\`public.products\\` has RLS enabled, but no policies exist",
+              "metadata": {
+                "name": "products",
+                "type": "table",
+                "schema": "public"
+              },
+              "observed_at": "2026-10-17T09:29:48.983Z"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "performance": {
+    "result": {
+      "lints": [
+        {
+          "name": "unused_index",
+          "title": "Unused Index",
+          "level": "INFO",
+          "facing": "EXTERNAL",
+          "categories": [
+            "PERFORMANCE"
+          ],
+          "description": "Detects if an index has never been used and may be a candidate for removal.",
+          "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0005_unused_index",
+          "count": 1,
+          "findings": [
+            {
+              "detail": "Index \\`custom_designs_owner_created_idx\\` on table \\`public.custom_designs\\` has not been used",
+              "metadata": {
+                "name": "custom_designs",
+                "type": "table",
+                "schema": "public"
+              },
+              "observed_at": "2026-10-17T09:29:48.720Z"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

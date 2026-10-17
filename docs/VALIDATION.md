@@ -1,5 +1,9 @@
 # Local validation
 
+## Approved development backend setup follow-up - 2026-10-17
+
+Both free-tier development projects now exist, the generated secure foundation is applied, and native Firebase-to-Supabase trust is verified. With real public configuration and readiness false, `npm.cmd run check` passed **114 local + 3 Deno HTTP + 17 browser tests (34.8s)**, all three Edge entrypoint typechecks, build and 24 original assets. Audit: zero vulnerabilities. Additional **14 real Firebase**, **4 native trust** and **8 public Data API denial** checks pass; hosted SQL fixtures were rolled back and Firebase fixtures deleted. Application login/checkout remain disabled; operational functions, server secrets, full Customer flows, Admin enrollment/recovery and deployed abuse controls are incomplete. See [actual backend evidence and limits](qa/backend-setup-results.md). Earlier sections below describe their historical test runs.
+
 ## 0.5.0-dev.5 saved-design API/UI preparation — 2026-10-17
 
 `npm.cmd run check` passed: **114 Node/DOM/database tests** (12 draft, 20 auth/build guard, 11 portal policy, 9 MFA, 25 database, 17 Customer, 14 saved-design/SDK/SQL and 6 library component), **3 Deno HTTP denial tests**, all three Edge entrypoint typechecks, production build, **24 original assets** and **17 browser tests** (38.5s, no failures/retries). Audit: **0 vulnerabilities**. Follow-up library component checks also pass after clearing all confirmation/name state on permission loss.

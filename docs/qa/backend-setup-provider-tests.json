@@ -1,0 +1,63 @@
+{
+  "checkedAt": "2026-10-17T09:29:04.585Z",
+  "projectId": "twistfuzz-dev-sych13",
+  "scope": "Real Firebase SDK/JWKS/current-account/TOTP checks and closed Supabase Data API; no portal/gateway approval",
+  "checks": [
+    {
+      "label": "Real unverified-email token denied by production verifier",
+      "result": "PASS"
+    },
+    {
+      "label": "Real Google JWKS signature and verified password identity pass",
+      "result": "PASS"
+    },
+    {
+      "label": "Current Firebase account lookup and revocation-state validation pass",
+      "result": "PASS"
+    },
+    {
+      "label": "Real token denied for a different expected Firebase project",
+      "result": "PASS"
+    },
+    {
+      "label": "Tampered transport role fails real signature validation",
+      "result": "PASS"
+    },
+    {
+      "label": "Anonymous profile read denied",
+      "result": "PASS"
+    },
+    {
+      "label": "Firebase token cannot bypass disabled database integration",
+      "result": "PASS"
+    },
+    {
+      "label": "Real TOTP factor enrollment succeeds without SMS",
+      "result": "PASS"
+    },
+    {
+      "label": "Real password sign-in requires enrolled second factor",
+      "result": "PASS"
+    },
+    {
+      "label": "Incorrect authenticator code rejected by Firebase",
+      "result": "PASS"
+    },
+    {
+      "label": "Valid TOTP sign-in has signed second-factor claim",
+      "result": "PASS"
+    },
+    {
+      "label": "Current disabled Firebase account denied despite signed token",
+      "result": "PASS"
+    },
+    {
+      "label": "Revoked Firebase session denied despite signed token",
+      "result": "PASS"
+    },
+    {
+      "label": "Disposable Firebase fixture deleted and absence confirmed",
+      "result": "PASS"
+    }
+  ]
+}

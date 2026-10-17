@@ -1,0 +1,25 @@
+{
+  "checkedAt": "2026-10-17T09:26:34.419Z",
+  "projectId": "twistfuzz-dev-sych13",
+  "appId": "1:1002678131382:web:e62bbedc6f82d4f3dce417",
+  "billingEnabled": false,
+  "billingAccountLinked": false,
+  "subtype": "IDENTITY_PLATFORM",
+  "emailEnabled": true,
+  "passwordRequired": true,
+  "googleEnabled": true,
+  "phoneEnabled": false,
+  "anonymousEnabled": false,
+  "authorizedDomains": [
+    "twistfuzz-dev-sych13.firebaseapp.com",
+    "twistfuzz-dev-sych13.web.app",
+    "twistfuzz-bloom-preview.vercel.app",
+    "localhost",
+    "127.0.0.1"
+  ],
+  "mfaState": "ENABLED",
+  "totpEnabled": true,
+  "totpAdjacentIntervals": 1,
+  "emailPrivacy": true,
+  "applicationReadiness": false
+}

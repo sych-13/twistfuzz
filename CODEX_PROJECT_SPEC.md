@@ -62,4 +62,6 @@ This document consolidates decisions previously confirmed by the user. Do not si
 
 ## Delivery status / deployment honesty
 
+**Current update, 2026-10-17:** The original handoff inventory below is historical. Owner authorized GitHub/Vercel delivery and free-tier development Firebase/Supabase setup. Source is now `sych-13/twistfuzz`, protected Vercel hosting is active, Firebase `twistfuzz-dev-sych13` and Supabase `xoitxpoqejpprjyejgjv` exist, and the secure development foundation/native transport trust are verified. Full application authentication, Customer flows, Admin enrollment/recovery and deployed abuse limits remain gated. No billing link, paid upgrade or real payment is authorized. See `docs/BACKEND_SETUP_PLAN.md` and the checkpoint for actual results.
+
 Prior connected Vercel project `twistfuzz-bloom-preview` was created for a protected staging preview, but **v0.3 ZIP and any deployment may have different source versions**. Verify deployment content/build; do not assume sync. No TWISTFUZZ GitHub repo was found or created during this handoff. No live database or Firebase project was provisioned.

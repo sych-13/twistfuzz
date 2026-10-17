@@ -1,0 +1,26 @@
+{
+  "checkedAt": "2026-10-17T09:31:26.984Z",
+  "firebaseProjectId": "twistfuzz-dev-sych13",
+  "supabaseProjectId": "xoitxpoqejpprjyejgjv",
+  "databaseIntegrationEnabled": false,
+  "checks": [
+    {
+      "label": "Native Supabase gateway accepts intended Firebase project and authenticated transport claim",
+      "result": "PASS",
+      "httpStatus": 200
+    },
+    {
+      "label": "Closed database integration returns no saved designs",
+      "result": "PASS"
+    },
+    {
+      "label": "Native gateway rejects tampered Firebase transport role",
+      "result": "PASS",
+      "httpStatus": 401
+    },
+    {
+      "label": "Disposable Firebase trust fixture deleted and absence confirmed",
+      "result": "PASS"
+    }
+  ]
+}

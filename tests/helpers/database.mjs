@@ -1,6 +1,6 @@
 import { PGlite } from '@electric-sql/pglite';
 import { pgcrypto } from '@electric-sql/pglite/contrib/pgcrypto';
-import { readFileSync } from 'node:fs';
+import { readFileSync, readdirSync } from 'node:fs';
 
 const root = new URL('../../', import.meta.url);
 export const fixtureProject = 'twistfuzz-local-tests';
@@ -25,8 +25,10 @@ export async function localDatabase() {
     grant usage on schema public, auth to anon, authenticated, service_role;
     grant execute on function auth.jwt() to anon, authenticated, service_role;
   `);
-  await database.exec(readFileSync(new URL('supabase/migrations/0001_foundation.sql', root), 'utf8'));
-  await database.exec(readFileSync(new URL('supabase/schema-drafts/auth_design_access.sql', root), 'utf8'));
+  const migrations = new URL('supabase/migrations/', root);
+  for (const file of readdirSync(migrations).filter(name => name.endsWith('.sql')).sort()) {
+    await database.exec(readFileSync(new URL(file, migrations), 'utf8'));
+  }
   const project = (await database.query('select version() as version')).rows[0].version;
   return { database, version: project };
 }

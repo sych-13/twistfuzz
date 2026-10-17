@@ -1,6 +1,6 @@
-# V0.5 database access candidate
+# V0.5 development database access
 
-`supabase/schema-drafts/auth_design_access.sql` is a local review candidate layered over the original `0001_foundation.sql`. It is **not a generated/deployed migration**. Nothing has been applied to a hosted database. Keep the original foundation and this candidate together when reviewing the proposed schema.
+The owner-approved development project `xoitxpoqejpprjyejgjv` now runs `supabase/migrations/20261017091937_twistfuzz_secure_foundation.sql`. It combines the original foundation and reviewed access candidate without SQL logic changes. The byte-preserved original is archived at `supabase/schema-drafts/0001_foundation.sql`; `auth_design_access.sql` remains its historical review companion. Local tests load the generated migration, not the archived drafts. See `qa/backend-setup-results.md` for CLI generation, remote history alignment, hashes and actual hosted checks. Integration remains disabled.
 
 ## Trust and access
 
@@ -21,7 +21,7 @@ Ownership is enforced by both permissive and restrictive `USING`/`WITH CHECK` po
 
 ## Saved-design data
 
-The proposed `custom_designs` additions are `name`, `updated_at` and a server-maintained `revision`. A trigger preserves identity and increments revisions on updates. The locally implemented `saved-designs` endpoint requires an expected revision for update/delete, includes owner identity in every data operation and reports a generic conflict for stale/inaccessible records. Its request-scoped public-key/user-token client retains RLS. The Studio account panel uses this contract. Neither the endpoint nor schema has been deployed/live validated; see `supabase/functions/saved-designs/README.md`.
+The applied `custom_designs` additions are `name`, `updated_at` and a server-maintained `revision`. A trigger preserves identity and increments revisions on updates. The locally implemented `saved-designs` endpoint requires an expected revision for update/delete, includes owner identity in every data operation and reports a generic conflict for stale/inaccessible records. Its request-scoped public-key/user-token client retains RLS. The Studio account panel uses this contract. The schema has hosted SQL validation, but the endpoint is not deployed and its complete live flow is untested; see `supabase/functions/saved-designs/README.md`.
 
 The database bouquet validator is deliberately strict: only flowers, wrapper, ribbon and the existing message-card option are stored. Its option parity is tested against all 390 combinations from the current frontend model. Later approved schema/options must update both validators and their compatibility rules. These records are saved designs, not orders or stock reservations, and do not assert price/inventory availability.
 
@@ -33,13 +33,15 @@ The implemented `provision-customer` HTTP endpoint derives UID/email from a cryp
 
 ## Local verification and limits
 
-`npm.cmd run test:database` starts an in-memory **PGlite/PostgreSQL** instance, loads the unmodified foundation (including pgcrypto) and the candidate, creates disposable SQL roles, and exercises actual PostgreSQL grants, constraints, triggers, transactions and RLS. It requires no Docker, credentials, connection URL or network database. Versioned TAP output is retained in `docs/qa/`.
+`npm.cmd run test:database` starts an in-memory **PGlite/PostgreSQL** instance, loads the committed generated migrations (including pgcrypto), creates disposable SQL roles, and exercises actual PostgreSQL grants, constraints, triggers, transactions and RLS. It requires no Docker, credentials, connection URL or network database. Versioned TAP output is retained in `docs/qa/`.
 
 The test-only `auth.jwt()` function reads a simulated gateway claims context. Test fixtures intentionally exercise valid and invalid contexts; they are not an app authentication path and are not shipped in the frontend/Edge Functions. Signature verification is covered independently by the actual JOSE verifier tests.
 
 These tests do **not** certify hosted Supabase gateway behavior, PostgREST grants/exposed-schema configuration, the intended deployed Postgres version, genuine concurrent sessions, Firebase revocation checks, provider MFA or deployed rate limits. A signed token's account state can change before expiry: direct Data API policies check profile activation/current business role, while protected server endpoints must also perform current Firebase account/revocation checks.
 
-## Gate before a real migration or activation
+## Development application activation gate
+
+The first development migration is applied; the following checklist still governs further migrations and activation. Native Firebase transport trust returns 200 for a genuine configured-project token and 401 for tampering; eight live anonymous/private-schema denial checks pass. SQL fixtures were rolled back; no application profiles/designs/audits exist. Security INFO notices on intentionally inaccessible catalog/audit tables are documented, not suppressed with permissive policies.
 
 1. Obtain approval/access to the intended development projects; inspect existing data and configured Postgres/API versions without assuming this candidate matches them.
 2. Review schema/security choices, existing draft compatibility and provider recovery controls. Do not delete invalid historical data merely to make constraints pass.

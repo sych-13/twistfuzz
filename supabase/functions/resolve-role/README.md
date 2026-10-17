@@ -42,8 +42,8 @@ From the project root, run `npm.cmd run test:auth`, `npm.cmd run check:edge`, an
 
 ## Still required before V0.5 completion
 
-- Actual Firebase/Supabase projects, deployment and server-secret configuration require explicit approval. No projects exist in the connected Supabase account as of the 2026-10-17 read-only check.
-- Validate live tokens, JWKS key rotation/outages, Firebase Admin account/revocation reads, database role reads and audit writes. Apply explicit project/table grants and verify RLS in the intended database; the original migration remains an unapplied draft.
+- Free-tier development setup is owner-approved and both projects exist. Firebase providers/TOTP, native Supabase trust, the generated secure foundation and standalone provider/SQL checks are recorded in `docs/BACKEND_SETUP_PLAN.md`. Server secrets and this function are not deployed yet; do not interpret project creation as application activation.
+- Standalone real JWT/JWKS/current-account/TOTP/revocation tests pass, but key rotation/outages and the actual Edge Firebase Admin/database/audit integration remain untested. The applied development schema defaults disabled; full deployed-flow RLS validation is still required.
 - The local MFA challenge interface now handles enrolled TOTP/phone methods and passes component/policy tests. Validate it against real providers, implement secure initial enrollment and exercise pre-established Admin recovery; no MFA bypass or browser-assigned privileged role. Admin/staff provisioning remains server-only. See `docs/AUTHENTICATION_RECOVERY.md` for the provider-level password-recovery caveat.
 - Add deployed request rate limits and verify abuse limits, CORS and response behavior through the actual gateway. Local tests do not certify these controls.
 - Every protected data/action endpoint needs its own verified identity, current permissions and ownership controls. Resolving a dashboard role alone does not authorize orders, inventory, payments, riders or saved designs.

@@ -1,0 +1,54 @@
+{
+  "checkedAt": "2026-10-17T09:29:51.001Z",
+  "projectId": "xoitxpoqejpprjyejgjv",
+  "checks": [
+    {
+      "test": "Anonymous profiles access denied",
+      "httpStatus": 401,
+      "providerCode": "42501",
+      "result": "PASS"
+    },
+    {
+      "test": "Anonymous custom_designs access denied",
+      "httpStatus": 401,
+      "providerCode": "42501",
+      "result": "PASS"
+    },
+    {
+      "test": "Anonymous products access denied",
+      "httpStatus": 401,
+      "providerCode": "42501",
+      "result": "PASS"
+    },
+    {
+      "test": "Anonymous flower_types access denied",
+      "httpStatus": 401,
+      "providerCode": "42501",
+      "result": "PASS"
+    },
+    {
+      "test": "Anonymous audit_events access denied",
+      "httpStatus": 401,
+      "providerCode": "42501",
+      "result": "PASS"
+    },
+    {
+      "test": "Anonymous resolve_business_role denied",
+      "httpStatus": 401,
+      "providerCode": "42501",
+      "result": "PASS"
+    },
+    {
+      "test": "Anonymous provision_customer_profile denied",
+      "httpStatus": 401,
+      "providerCode": "42501",
+      "result": "PASS"
+    },
+    {
+      "test": "Private configuration schema is not exposed through Data API",
+      "httpStatus": 406,
+      "providerCode": "PGRST106",
+      "result": "PASS"
+    }
+  ]
+}

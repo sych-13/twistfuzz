@@ -7,7 +7,7 @@
 
 **Hosting update (2026-10-17):** Owner subsequently authorized GitHub + Vercel delivery. Source is now on `sych-13/twistfuzz`; the existing Vercel project is Git-connected and a protected preview of commit `968e57c` passed 12 hosted checks. See `docs/DEPLOYMENT.md`. Authentication/payments remain disabled and V0.5 is incomplete.
 
-Owner reaffirmed autonomous continuation on 2026-10-17. Resume from `docs/DEVELOPMENT_CHECKPOINT.md` and the active thread Goal. Local V0.5 verifier/request/configuration tests pass; do not equate them with a completed live Firebase/Supabase, RLS or MFA integration. External projects remain unprovisioned.
+Owner reaffirmed autonomous continuation and approved free-tier development backends on 2026-10-17. Firebase `twistfuzz-dev-sych13` and Supabase `xoitxpoqejpprjyejgjv` now exist; providers/native trust and hosted schema checks pass, with all application gates still disabled. Resume from `docs/DEVELOPMENT_CHECKPOINT.md` and `docs/BACKEND_SETUP_PLAN.md`. Full deployed-function, Customer and Admin enrollment/recovery validation remains incomplete. No paid upgrades are authorized.
 
 ## Do this first
 
@@ -24,7 +24,7 @@ Owner reaffirmed autonomous continuation on 2026-10-17. Resume from `docs/DEVELO
 - Procedural bouquet proof-of-concept: `src/features/three/BouquetPreview.tsx` (not final sculpted fuzzy-wire flower models).
 - Role-specific login routes `/login`, `/staff/login`, `/admin/login`.
 - Firebase and Supabase service scaffolding, **not configured against live projects**.
-- Supabase migration draft: `supabase/migrations/0001_foundation.sql`; not deployed.
+- Historical Supabase foundation draft is archived at `supabase/schema-drafts/0001_foundation.sql`; the current generated development migration and actual application state are documented in `docs/DATABASE_ACCESS.md`.
 - Original logo `public/branding/twistfuzz-logo.jpg`, real product reference photos under `public/products/`, original flyers under `public/reference-flyers/`.
 - Approved Elegant Garden concept in `docs/elegant-garden-approved-concept.png` and visual campaign assets in `public/campaign/`.
 - Promotional lookbook `/lookbook`; check actual implementation.
