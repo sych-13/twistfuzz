@@ -13,3 +13,16 @@ The local directory is linked to the verified existing Vercel project. Initial G
 Source upload succeeded: initial commit `b5816e70df66aa7b0028c5da26b418373f735220` is on `sych-13/twistfuzz/main`. GitHub Login Connection now passes, but linking reports that the Vercel GitHub App must be installed/authorized for this repository. The owner has been given the provider's exact installation link, `https://github.com/apps/vercel`. Automatic Git deployments are not yet confirmed.
 
 First CLI preview `dpl_Ht3kiVrDpNYiS3TuGe5rTsQjfgEk` failed during cloud `npm ci`: the lockfile omitted required optional-tree dependency `@opentelemetry/api@1.9.1`. Local npm's lockfile-only refresh did not repair it. Added that exact version as an explicit development dependency so clean installs include the required record. This is dependency completion, not an application analytics integration. Cloud retry and post-deployment validation remain pending.
+
+## Verified delivery
+
+- GitHub: [sych-13/twistfuzz](https://github.com/sych-13/twistfuzz), branch `main`. Source/dependency-fix commit: `968e57c8fd9c3b39298fc832eb63c234f408a31e`.
+- Preview: [open TWISTFUZZ](https://twistfuzz-bloom-preview-8jf46vh0o-icarus9963-7076.vercel.app).
+- Deployment: `dpl_6wRnKceqpg9MMrBKBNYbumdS6VRm`, **READY**, Preview, Vite, cloud build **38 seconds**. Metadata confirms the exact source commit/repository. The historical stable production alias has not been updated by this CLI preview.
+- Git connection now succeeds after the owner configured Login Connections and the Vercel GitHub App. A separate project API read confirms provider GitHub, owner `sych-13`, repo `twistfuzz`, repository ID `1422224607`, production branch `main`. Future pushes follow this integration's branch deployment behavior; direct Git-triggered delivery is checked separately below when available.
+- `npm.cmd ci` now passes locally; full gate passes again after the dependency fix: **94 local tests, 2 Deno HTTP tests, Edge typechecks, build, 24 assets, 16 browser tests (29.7s)**. Audit: **0 vulnerabilities**. Clean-install browser evidence: `qa/github-vercel-clean-install-browser-results.json`.
+- **12 hosted checks PASS**: five direct routes, three closed portals, working 3D/local draft save/reload/reopen, disabled checkout, all 24 original image hashes/decoding, five mobile layouts and no browser runtime errors. Evidence: `qa/vercel-deployed-preview-results.json`, `qa/vercel-deployed-home-mobile.png` and `qa/vercel-deployed-studio-mobile.png`. The screenshot capture waits for the deferred studio before recording it.
+
+Hosted verification uses the current project's short-lived development OIDC token, loaded locally without printing it. Only requests to the exact preview origin receive the header. No protection setting was disabled; sign in with the owning Vercel account to view the preview normally. Repeat using `node tests/verify-deployed-preview.mjs https://<this-project-preview-host>/` after refreshing local Vercel development authentication.
+
+This is frontend preview delivery, not live Firebase/Supabase integration or a completed V0.5 release. No operational API, real sign-in, MFA enrollment/recovery, account-backed saved-design flow, price/stock/order/payment integration was activated. Existing business restrictions remain unchanged.

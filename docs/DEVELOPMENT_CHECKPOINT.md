@@ -6,6 +6,7 @@ The owner explicitly requested continued autonomous local development, testing a
 
 ## Current source
 
+- Owner authorized GitHub + Vercel delivery on 2026-10-17. Local Git now tracks `https://github.com/sych-13/twistfuzz.git`, branch `main`; source commit `968e57c` is deployed as a protected Vercel Preview and passed 12 hosted checks. Existing Vercel project `twistfuzz-bloom-preview` is Git-connected after owner-configured Login Connections/App access. See `docs/DEPLOYMENT.md` before future hosting work. The deployment build explicitly forces authentication readiness false. `.env.local` now contains CLI-created local development authentication and must remain ignored; do not print or commit it.
 - v0.3 repaired and validated; v0.4 local bouquet drafts implemented and validated.
 - Package `0.5.0-dev.4`, V0.5 **in progress, not released**: local server identity/role verification, real-SDK MFA challenge interface, verified Customer provisioning HTTP/client flow and tested database ownership/RLS review candidate are implemented. Readiness gates and the private-key build guard remain in place. Do not mark V0.5 complete before real project/gateway/PostgREST/provisioning integration, saved-design API/UI and mandatory Admin enrollment/recovery tests.
 - Read `CODEX_HANDOFF.md`, `CODEX_PROJECT_SPEC.md`, the roadmap and changelog when resuming. Preserve Elegant Garden and every original image/logo. Do not restart the app.

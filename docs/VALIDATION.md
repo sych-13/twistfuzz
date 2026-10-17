@@ -1,5 +1,15 @@
 # Local validation
 
+## GitHub/Vercel delivery verification — 2026-10-17
+
+Owner authorized delivery to `sych-13/twistfuzz` and Vercel. First cloud `npm ci` failed because `@opentelemetry/api@1.9.1` was missing from the optional dependency tree in the lockfile. Explicitly pinned that development dependency; local clean install then passed and cloud retry reached **READY** in 38s at commit `968e57c`.
+
+After the fix, the complete local gate passed again: **94 local tests, 2 Deno HTTP tests, both Edge typechecks, production build, 24 assets and 16 browser tests (29.7s)**. Audit: **0 vulnerabilities**. An earlier supplementary preview build with all public fixture variables and readiness=true also remained closed (**2/2 browser checks**, 6.4s), verifying the deployment build's forced readiness gate.
+
+Actual hosted browser checks: **12 PASS**, covering direct SPA routes, all three closed portals, 3D/local draft save/reload/reopen, disabled checkout, SHA-256 preservation and decoding of all 24 hosted original images, mobile layouts and no runtime errors. Tests authenticated only to the exact preview origin with a locally loaded short-lived Vercel OIDC header; no credential is in evidence files. Hosted screenshots were inspected; studio capture waits for the deferred component. Source and hosting delivery do not validate live Firebase/Supabase or complete V0.5.
+
+Evidence: `qa/github-vercel-local-gate-browser-results.json`, `qa/github-vercel-forced-closed-browser-results.json`, `qa/github-vercel-clean-install-browser-results.json`, `qa/vercel-deployed-preview-results.json` and hosted mobile screenshots. See `DEPLOYMENT.md` for the deployment URL, project/repository linkage and protection behavior.
+
 ## 0.5.0-dev.4 verified Customer onboarding — 2026-10-17
 
 `npm.cmd run check` passed: **94 Node/DOM/database tests** (12 drafts, 20 auth/build guard, 11 portal policy, 9 MFA components, 25 database, 17 Customer), **2 Deno loopback HTTP tests**, both Edge entrypoint typechecks, production build, **24 original assets**, and **16 browser regressions** (29.1s, no failures/retries). A follow-up `npm.cmd audit --json` exited 0 with **0 vulnerabilities**.

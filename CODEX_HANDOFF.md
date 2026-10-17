@@ -5,6 +5,8 @@
 **Working prerelease:** `0.5.0-dev.4` — tested local authentication/MFA, verified Customer onboarding and database ownership/RLS candidate; live integration still gated.  
 **Development status:** Local development resumed by owner on 2026-10-16. V0.3 and V0.4 validation results are in `docs/CHANGELOG.md` and `docs/VALIDATION.md`. V0.5 requires Firebase/Supabase configuration and security integration validation. No public deployment or real payments enabled.
 
+**Hosting update (2026-10-17):** Owner subsequently authorized GitHub + Vercel delivery. Source is now on `sych-13/twistfuzz`; the existing Vercel project is Git-connected and a protected preview of commit `968e57c` passed 12 hosted checks. See `docs/DEPLOYMENT.md`. Authentication/payments remain disabled and V0.5 is incomplete.
+
 Owner reaffirmed autonomous continuation on 2026-10-17. Resume from `docs/DEVELOPMENT_CHECKPOINT.md` and the active thread Goal. Local V0.5 verifier/request/configuration tests pass; do not equate them with a completed live Firebase/Supabase, RLS or MFA integration. External projects remain unprovisioned.
 
 ## Do this first

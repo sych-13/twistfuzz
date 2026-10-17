@@ -1,0 +1,19 @@
+{
+  "url": "https://twistfuzz-bloom-preview-8jf46vh0o-icarus9963-7076.vercel.app",
+  "checkedAt": "2026-10-17T04:18:01.292Z",
+  "checks": [
+    "direct route /",
+    "direct route /shop",
+    "direct route /lookbook",
+    "direct route /studio",
+    "direct route /missing",
+    "closed portal /account",
+    "closed portal /staff/dashboard",
+    "closed portal /admin/dashboard",
+    "3D studio, closed checkout and local draft save/reopen",
+    "all 24 hosted original images match SHA-256 and decode",
+    "five mobile route layouts fit 390px",
+    "no browser runtime errors"
+  ],
+  "passed": true
+}
