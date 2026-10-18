@@ -42,8 +42,8 @@ From the project root, run `npm.cmd run test:auth`, `npm.cmd run check:edge`, an
 
 ## Still required before V0.5 completion
 
-- Free-tier development setup is owner-approved and both projects exist. Firebase providers/TOTP, native Supabase trust, the generated secure foundation and standalone provider/SQL checks are recorded in `docs/BACKEND_SETUP_PLAN.md`. Server secrets and this function are not deployed yet; do not interpret project creation as application activation.
+- Free-tier development setup is owner-approved and both projects exist. Providers/TOTP, native trust and the secure foundation are recorded in `docs/BACKEND_SETUP_PLAN.md`. Secure credentials and this function are now deployed with readiness false. Hosted denial/CORS tests pass; enabled identity/role/audit integration remains unvalidated.
 - Standalone real JWT/JWKS/current-account/TOTP/revocation tests pass, but key rotation/outages and the actual Edge Firebase Admin/database/audit integration remain untested. The applied development schema defaults disabled; full deployed-flow RLS validation is still required.
 - The local MFA challenge interface now handles enrolled TOTP/phone methods and passes component/policy tests. Validate it against real providers, implement secure initial enrollment and exercise pre-established Admin recovery; no MFA bypass or browser-assigned privileged role. Admin/staff provisioning remains server-only. See `docs/AUTHENTICATION_RECOVERY.md` for the provider-level password-recovery caveat.
-- Add deployed request rate limits and verify abuse limits, CORS and response behavior through the actual gateway. Local tests do not certify these controls.
+- Add distributed request rate limits. Hosted closed-gateway CORS/denial checks pass; they do not certify enabled provider operations or abuse controls. Dev.6 bounds total body read time to five seconds and validates body sizes/JSON before initializing server dependencies.
 - Every protected data/action endpoint needs its own verified identity, current permissions and ownership controls. Resolving a dashboard role alone does not authorize orders, inventory, payments, riders or saved designs.

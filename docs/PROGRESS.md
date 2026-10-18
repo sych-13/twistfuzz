@@ -1,6 +1,8 @@
 # Progress ng TWISTFUZZ
 
-Na-update: 17 October 2026. Local package: **0.5.0-dev.5**. Huling kumpletong milestone: **V0.4**. Ginagawa pa ang V0.5; hindi pa live ang authentication.
+Na-update: 18 October 2026. Package: **0.5.0-dev.6**. Huling kumpletong milestone: **V0.4**. Ginagawa pa ang V0.5; hindi pa live ang authentication.
+
+**Pinakabagong progreso:** deployed na ang tatlong backend function sa disabled state at naka-store nang ligtas ang server credentials. May request timeout at mas mahigpit na body validation. Pumasa ang **127 local, 4 Deno, 17 browser, 36 hosted checks**, build at 24 original-image checks; npm/Deno audits walang kilalang vulnerabilities. Nakumpirma na ang Admin email ngunit kailangan pa ang private MFA enrollment/recovery, full Customer flow at distributed rate limits. Tingnan ang [latest checkpoint](DEVELOPMENT_CHECKPOINT.md). Ang mas lumang detalye sa ibaba ay dev.5 snapshot.
 
 Nasa [GitHub](https://github.com/sych-13/twistfuzz) na ang source at connected na sa Vercel. Buksan ang [hosted TWISTFUZZ preview](https://twistfuzz-bloom-preview-8jf46vh0o-icarus9963-7076.vercel.app); mag-sign in gamit ang owning Vercel account kung hingin. Pumasa ang 12 hosted checks. Nasa [deployment report](DEPLOYMENT.md) ang eksaktong commit, tests at restrictions.
 

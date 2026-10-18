@@ -1,6 +1,6 @@
 {
   "name": "twistfuzz-bloom-studio",
-  "version": "0.5.0-dev.5",
+  "version": "0.5.0-dev.6",
   "private": true,
   "type": "module",
   "scripts": {
@@ -13,7 +13,7 @@
     "test:unit": "node --experimental-strip-types --test tests/drafts.test.mjs",
     "test": "npm run test:unit && npm run test:auth && npm run test:auth-flow && npm run test:auth-ui && npm run test:database && npm run test:customer && npm run test:designs && npm run test:assets",
     "check": "npm test && npm run check:edge && npm run test:edge && npm run build && npm run test:e2e",
-    "test:auth": "node --experimental-strip-types --test tests/auth.test.mjs tests/build-guard.test.mjs",
+    "test:auth": "node --experimental-strip-types --test tests/auth.test.mjs tests/build-guard.test.mjs tests/http-boundary.test.mjs",
     "check:edge": "deno check --config supabase/functions/deno.json supabase/functions/resolve-role/index.ts supabase/functions/provision-customer/index.ts supabase/functions/saved-designs/index.ts",
     "test:edge": "deno test --allow-env --allow-net=127.0.0.1 --config supabase/functions/deno.json tests/edge-smoke.test.ts",
     "test:auth-flow": "node --experimental-strip-types --test tests/auth-flow.test.mjs",

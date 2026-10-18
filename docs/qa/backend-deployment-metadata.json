@@ -1,0 +1,43 @@
+{
+  "recordedClientDate": "2026-10-18",
+  "projectId": "xoitxpoqejpprjyejgjv",
+  "applicationEnabled": false,
+  "functions": [
+    {
+      "name": "resolve-role",
+      "id": "26cff43d-e9db-4b91-b2f0-d57933872b71",
+      "version": 2,
+      "status": "ACTIVE",
+      "verify_jwt": false,
+      "ezbr_sha256": "b0b7085d1329851c9b09e889b848e274a316798d148858b1fc6243ccf775a703"
+    },
+    {
+      "name": "provision-customer",
+      "id": "3669a234-3533-47b9-9e3b-3e237d26abb0",
+      "version": 2,
+      "status": "ACTIVE",
+      "verify_jwt": false,
+      "ezbr_sha256": "ba8d88f4cef11735efceb4b2271e480d30fa090e041736c680bf94ad6ed58a65"
+    },
+    {
+      "name": "saved-designs",
+      "id": "47720365-6b42-4ad7-9ca3-670bc814b954",
+      "version": 2,
+      "status": "ACTIVE",
+      "verify_jwt": false,
+      "ezbr_sha256": "2e2e8a5d5f465008890fef68245b3e00b5b54b6380405afc4211a2142363902a"
+    }
+  ],
+  "frontend": {
+    "id": "dpl_BhbgvbR1DLLF8CDpUAXQVH3qDmJ5",
+    "status": "READY",
+    "url": "twistfuzz-bloom-preview-bblpvy80r-icarus9963-7076.vercel.app",
+    "source": "git",
+    "commit": "c15729599bd94def8804310e3e533eea4fcf764f",
+    "alias": [
+      "twistfuzz-bloom-preview.vercel.app",
+      "twistfuzz-bloom-preview-icarus9963-7076.vercel.app",
+      "twistfuzz-bloom-preview-git-main-icarus9963-7076.vercel.app"
+    ]
+  }
+}

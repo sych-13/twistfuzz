@@ -16,7 +16,7 @@
 
 ## v0.5 — next, requires configuration and integration validation
 
-- Local prerelease dev.5 includes verifier/MFA preparation, PostgreSQL ownership/RLS candidate, Customer onboarding and Customer saved-design API/Studio library with revision conflicts. These do not complete live integration. Next: provider/project integration and initial Admin enrollment/recovery; see `DATABASE_ACCESS.md` and the checkpoint.
+- Prerelease dev.6 adds bounded server request reads to the verifier/MFA, PostgreSQL ownership/RLS, Customer onboarding and saved-design work. The three development functions are deployed disabled; secure credentials and closed-gateway checks pass. Next: complete provider/Customer integration, distributed abuse limits and initial Admin enrollment/recovery; see the checkpoint.
 - Owner-approved free-tier Firebase/Supabase development projects and ignored public configuration now exist. The generated secure foundation, provider TOTP/JWKS checks, native transport trust and anonymous Data API denials pass. Full deployed-function, two-Customer, Admin enrollment/recovery and abuse-control validation remain; see `BACKEND_SETUP_PLAN.md`.
 - Implement and test cryptographic Firebase ID-token verification, trusted role provisioning, per-user saved designs and ownership/RLS enforcement.
 - Customer email verification, Google Sign-In and recovery; staff email/password and admin-assisted recovery; mandatory Admin MFA and pre-established recovery.

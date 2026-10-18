@@ -1,0 +1,318 @@
+
+> twistfuzz-bloom-studio@0.5.0-dev.6 check
+> npm test && npm run check:edge && npm run test:edge && npm run build && npm run test:e2e
+
+
+> twistfuzz-bloom-studio@0.5.0-dev.6 test
+> npm run test:unit && npm run test:auth && npm run test:auth-flow && npm run test:auth-ui && npm run test:database && npm run test:customer && npm run test:designs && npm run test:assets
+
+
+> twistfuzz-bloom-studio@0.5.0-dev.6 test:unit
+> node --experimental-strip-types --test tests/drafts.test.mjs
+
+✔ every confirmed flower/color, wrapper and ribbon survives a save/load round trip (8.3555ms)
+✔ empty bouquets are valid preview drafts (0.2652ms)
+✔ duplicate flower/color rows normalize without mutating the input (0.1342ms)
+✔ 30-stem cap applies to all rows combined, including duplicates (0.4318ms)
+✔ rejects malformed JSON, nulls, arrays, wrong versions, invalid timestamps and oversized payloads (0.3133ms)
+✔ rejects non-integer, non-numeric, zero, negative, unsafe and excessive stem quantities (0.3198ms)
+✔ rejects invalid shape, unsupported flowers, per-flower colors and prototype property names (0.4333ms)
+✔ untrusted metadata including prices and roles is stripped from restored drafts (0.2341ms)
+✔ storage access, read, write and removal failures return actionable errors without throwing (0.3131ms)
+✔ corrupt drafts remain stored for explicit removal; invalid saves do not replace them (0.2962ms)
+✔ a failed quota write preserves the previous draft (0.2117ms)
+✔ rapid sequential stem changes enforce the cap and never create negative counts (0.6755ms)
+ℹ tests 12
+ℹ suites 0
+ℹ pass 12
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 147.4591
+
+> twistfuzz-bloom-studio@0.5.0-dev.6 test:auth
+> node --experimental-strip-types --test tests/auth.test.mjs tests/build-guard.test.mjs tests/http-boundary.test.mjs
+
+✔ valid RSA signed Firebase-shaped token is verified before trusted account/role lookup (9.6528ms)
+✔ bad signatures and algorithms cannot reach account or role lookups (77.6027ms)
+✔ rejects wrong Firebase project, issuer, multiple audiences, invalid user IDs and missing required claims (15.0234ms)
+✔ rejects expired, future, inconsistent and fractional JWT timestamps (9.9906ms)
+✔ rejects missing/unknown key IDs, embedded keys and attacker-directed key URLs (6.71ms)
+✔ rejects unverified email, anonymous/custom providers, unsupported tenants and unknown factors (11.2289ms)
+✔ trusted lookup governs business role even when signed token metadata claims admin (5.4788ms)
+✔ disabled, deleted, unverified or mismatched accounts and revoked sessions fail closed (2.5122ms)
+✔ database/account lookup failures deny access and do not expose provider errors (1.5855ms)
+✔ customer Google login is allowed; staff/admin Google login is rejected (2.1253ms)
+✔ Admin requires completed MFA and successful audit; staff MFA is optional (4.6353ms)
+✔ successful role endpoint returns only a role with exact-origin CORS and no cache (6.2474ms)
+✔ HTTP boundary rejects unknown origins, missing tokens, methods and bad JSON before identity lookup (4.5994ms)
+✔ preflight requires allowed origin and does not initialize backend credentials (0.3008ms)
+✔ HTTP errors redact internal details and disabled server configuration returns 503 (2.1856ms)
+✔ server config fails closed and origin configuration excludes wildcards, remote HTTP and paths (0.5241ms)
+✔ frontend auth needs all public configuration and an explicit completed-integration gate (0.3872ms)
+✔ public key detection permits only publishable and legacy anon Supabase credentials (0.1824ms)
+✔ build guard refuses private credentials before bundling, without echoing credential values (0.4822ms)
+✔ Vite refuses private credentials before emitting a browser bundle (2303.6303ms)
+✔ stalled body expires and cancels even when stream cancellation never settles (35.9159ms)
+✔ deadline covers the whole body despite periodic small chunks (55.6117ms)
+✔ request cancellation interrupts a pending body read (1.7586ms)
+✔ already cancelled requests never initialize dependencies (1.021ms)
+✔ declared oversized body is cancelled before reading or initializing dependencies (1.4162ms)
+✔ actual byte count rejects oversize despite a dishonest short Content-Length (1.2812ms)
+✔ byte limits count UTF-8 bytes across multiple chunks (0.9311ms)
+✔ malformed, negative, duplicate and inaccurate content lengths fail before dependencies (2.2789ms)
+✔ malformed JSON and invalid UTF-8 fail before dependencies (1.3053ms)
+✔ stream errors are redacted as invalid input (0.6549ms)
+✔ unsupported content type never initializes server dependencies (0.2655ms)
+✔ exact limit and split UTF-8 remain valid; JSON is handled once (0.7897ms)
+✔ invalid server limits cannot disable the deadline or size bound (0.5491ms)
+ℹ tests 33
+ℹ suites 0
+ℹ pass 33
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2403.503
+
+> twistfuzz-bloom-studio@0.5.0-dev.6 test:auth-flow
+> node --experimental-strip-types --test tests/auth-flow.test.mjs
+
+✔ verification codes preserve leading zeroes and reject malformed values (1.3299ms)
+✔ a portal requires refreshed verified identity and the matching server role (1.2112ms)
+✔ unverified accounts are signed out without looking up a role (1.0988ms)
+✔ identity refresh can update email verification before authorization (0.171ms)
+✔ role-service errors are redacted and failed verification signs out (0.2727ms)
+✔ refresh errors still sign out and a sign-out failure never grants portal access (0.2345ms)
+✔ cancel or a newer operation invalidates late async results (0.1884ms)
+✔ public auth errors do not echo SDK details and expired sessions require a fresh sign-in (0.3488ms)
+✔ verified Customer onboarding runs before role resolution and never runs for privileged portals (0.3792ms)
+✔ failed Customer onboarding signs out without requesting role access (0.5693ms)
+✔ cancelled verification does not start a later provisioning or role request (0.3322ms)
+ℹ tests 11
+ℹ suites 0
+ℹ pass 11
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 141.8922
+
+> twistfuzz-bloom-studio@0.5.0-dev.6 test:auth-ui
+> tsx --tsconfig tsconfig.app.json --test tests/auth-ui.test.tsx
+
+✔ authenticator method is preferred and a six-digit code is submitted without losing leading zeroes (182.1014ms)
+✔ short codes never reach the verification callback (30.5197ms)
+✔ an enrolled phone requires sending a code before verification becomes available (62.1542ms)
+✔ switching factors clears entered codes and requires a new SMS request (46.2135ms)
+✔ cancel remains available during verification and clears the entered code (19.7322ms)
+✔ a late SMS response cannot update an unmounted challenge (12.998ms)
+✔ failed SMS delivery does not enable code entry or announce success (12.941ms)
+✔ accessible errors identify the code field and no Admin recovery bypass is rendered (12.0872ms)
+✔ a missing supported factor cannot submit or hide cancellation (9.4916ms)
+ℹ tests 9
+ℹ suites 0
+ℹ pass 9
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 23943.9442
+
+> twistfuzz-bloom-studio@0.5.0-dev.6 test:database
+> node tests/run-database.mjs
+
+Local RLS engine: PostgreSQL 18.6 (PGlite 0.5.10) on wasm32-unknown-emscripten, compiled by emcc (Emscripten gcc/clang-like replacement + linker emulating GNU ld) 6.0.5 (1db513782be24469589d7cb8a1f1834e9a33f271), 32-bit
+✔ the schema candidate starts disabled and missing project configuration denies access (2349.8982ms)
+✔ text Firebase UIDs see only their own active profile and saved designs (6.1108ms)
+✔ anonymous SQL role has no application table access even with customer-shaped claims (13.2264ms)
+✔ missing, disabled and non-customer profiles cannot access Customer designs (24.9034ms)
+✔ wrong-project, unverified, expired, malformed and unsupported claims fail closed (63.6311ms)
+✔ supported Google Customer claims retain the same ownership restrictions (2.5709ms)
+✔ customer design create/read/update/delete works and metadata stays server-generated (9.8401ms)
+✔ cross-user read/update/delete affects no rows and cross-user create is rejected (7.1735ms)
+✔ revision checks detect a stale editor rather than silently replacing a newer save (6.4795ms)
+✔ clients cannot reassign design identity or forge revisions and timestamps (12.6212ms)
+✔ profiles, role assignment, integration settings and audit data remain server-only writes (20.2249ms)
+✔ malformed, oversized, unsupported and over-limit bouquets cannot be written through SQL (62.9401ms)
+✔ SQL options match all 390 confirmed palette/wrapper/ribbon combinations and accept empty previews (299.5733ms)
+✔ client metadata never changes the trusted profile role or ownership (2.8995ms)
+✔ deactivating a profile immediately blocks its saved designs in the database (4.4593ms)
+✔ restrictive policies still prevent cross-user access under an accidental permissive policy (5.9142ms)
+✔ profile write denials survive an accidental extra table grant and permissive policy (4.0947ms)
+✔ owner WITH CHECK rejects reassignment even if column grants and a trigger are accidentally weakened (4.3057ms)
+✔ Customer provisioning is service-only, fixed-role, idempotent and atomically audited (16.8496ms)
+✔ Customer provisioning cannot demote staff/admin or reactivate a disabled profile (16.2359ms)
+✔ invalid verified-identity arguments cannot create a Customer profile (20.7212ms)
+✔ trusted role/provisioning RPCs are pinned to the enabled database Firebase project (14.7221ms)
+✔ failed audit insertion rolls back Customer profile creation (4.0348ms)
+✔ trusted server role can read profiles and append audit events without public audit access (4.9172ms)
+✔ RLS is enabled/forced and no application private helper runs as security definer (5.6571ms)
+ℹ tests 25
+ℹ suites 0
+ℹ pass 25
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 3234.6599
+
+> twistfuzz-bloom-studio@0.5.0-dev.6 test:customer
+> node --experimental-strip-types --test tests/customer-provisioning.test.mjs tests/customer-client.test.mjs
+
+✔ Customer setup requests fresh SDK claims only after server confirmation (0.851ms)
+✔ invalid or privileged setup responses cannot advance token readiness (0.4873ms)
+✔ stale, missing or non-authenticated transport claims leave Customer setup unavailable (0.4662ms)
+✔ verified onboarding derives its Customer identity from the signed token and audits real SQL creation (2064.3657ms)
+✔ repeated onboarding never duplicates or promotes an existing Customer profile (27.3629ms)
+✔ unverified, disabled, deleted and revoked identities create no profile or transport claim (11.1383ms)
+✔ wrong project, expired and unverified token claims cannot reach provisioning (7.0147ms)
+✔ Staff, Admin and inactive profiles cannot be overwritten through Customer onboarding (20.2804ms)
+✔ caller identity/role fields and oversized bodies are rejected before provisioning (2.9066ms)
+✔ Google verified customers can provision only the same fixed Customer role (10.9408ms)
+✔ claim-write failure reports an error and retry completes the existing audited profile (20.8783ms)
+✔ a changed role before completion prevents a successful onboarding response (19.0955ms)
+✔ disabled runtime returns 503 without starting an external account or database client (2.1383ms)
+✔ transport assignment preserves unrelated claims and uses only the fixed authenticated value (0.2919ms)
+✔ a provider claim that does not read back correctly is never reported as verified (0.4781ms)
+✔ conflicting transport roles are never silently downgraded or copied into business roles (0.2707ms)
+✔ transport auditing must succeed before a provider write or a successful verification (0.2ms)
+ℹ tests 17
+ℹ suites 0
+ℹ pass 17
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 3240.4872
+
+> twistfuzz-bloom-studio@0.5.0-dev.6 test:designs
+> node --experimental-strip-types --test tests/saved-designs.test.mjs && tsx --tsconfig tsconfig.app.json --test tests/saved-designs-ui.test.tsx
+
+✔ saved command canonicalization accepts all 390 approved combinations and normalizes duplicates (2221.5019ms)
+✔ request contract rejects ownership, roles, prices and forged metadata at every level (1.0433ms)
+✔ names, identifiers, pagination and expected revisions are bounded and typed (1.67ms)
+✔ unsupported and over-limit bouquets cannot reach a write (14.2611ms)
+✔ verified Customer creates and reopens a real SQL record without exposing owner metadata (52.2359ms)
+✔ two Customers cannot read, update or delete each other’s designs (38.4715ms)
+✔ updates increment revisions; stale update/delete preserve the newer record (49.7772ms)
+✔ current inactive, Staff and unprovisioned accounts cannot use Customer design endpoints (9.2297ms)
+✔ expired/wrong-project tokens and disabled/revoked current accounts cannot access records (8.6855ms)
+✔ bounds, exact CORS, error redaction and disabled runtime remain enforced (6.429ms)
+✔ production SDK adapter filters every lookup/mutation by owner and mutations by revision (3.8767ms)
+✔ response validation rejects wrong IDs, malformed bouquets and oversized pages (0.5306ms)
+✔ bounded pagination returns only the current Customer with deterministic pages (60.7478ms)
+✔ SDK database errors never become successful writes or disclose server details (1.4464ms)
+ℹ tests 14
+ℹ suites 0
+ℹ pass 14
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 3546.7494
+✔ opening requires confirmation and updates carry the opened server revision (206.9572ms)
+✔ delete can be cancelled and requires the listed revision without changing the current bouquet (101.3179ms)
+✔ conflicts retain the current bouquet and never silently retry an update (84.5597ms)
+✔ a late open cannot replace a bouquet edited while the request was pending (49.5912ms)
+✔ unmounting invalidates late account results and double clicks issue one mutation (64.992ms)
+✔ lost Customer permission clears private list data and opened selection (37.4955ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 6
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 4023.7675
+
+> twistfuzz-bloom-studio@0.5.0-dev.6 test:assets
+> node tests/check-assets.mjs
+
+PASS: 24 original assets unchanged; image containers and 15 reference entries valid. Browser tests additionally decode every image.
+
+> twistfuzz-bloom-studio@0.5.0-dev.6 check:edge
+> deno check --config supabase/functions/deno.json supabase/functions/resolve-role/index.ts supabase/functions/provision-customer/index.ts supabase/functions/saved-designs/index.ts
+
+npm.cmd : Check supabase/functions/resolve-role/index.ts
+At line:2 char:95
++ ... DE -eq 0) { npm.cmd run check *> test-results/dev6-local-check.txt; $ ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Check supabase/...e-role/index.ts:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+
+Check supabase/functions/provision-customer/index.ts
+Check supabase/functions/saved-designs/index.ts
+
+> twistfuzz-bloom-studio@0.5.0-dev.6 test:edge
+> deno test --allow-env --allow-net=127.0.0.1 --config supabase/functions/deno.json tests/edge-smoke.test.ts
+
+Check tests/edge-smoke.test.ts
+running 4 tests from ./tests/edge-smoke.test.ts
+Deno request deadline cancels a stalled stream without initializing credentials ... ok (30ms)
+Deno HTTP runtime denies unconfigured auth without contacting external services ...
+------- output -------
+Deno.serve: request.signal aborts on successful responses (legacy behavior). To detect when a request has been fully delivered use the `completed` promise on the handler's info argument. Move cleanup to the handler's return path, or opt in to the new behavior with --unstable-no-legacy-abort. See https://docs.deno.com/go/unstable-no-legacy-abort
+----- output end -----
+Deno HTTP runtime denies unconfigured auth without contacting external services ... ok (35ms)
+Deno Customer provisioning HTTP runtime stays disabled without configuration ... ok (2ms)
+Deno saved-design HTTP runtime denies unconfigured access without external clients ... ok (1ms)
+
+ok | 4 passed | 0 failed (76ms)
+
+
+> twistfuzz-bloom-studio@0.5.0-dev.6 build
+> tsc -b && vite build
+
+vite v6.4.4 building for production...
+transforming...
+✓ 2224 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                     0.52 kB │ gzip:   0.35 kB
+dist/assets/index-DXw1dsgv.css     19.19 kB │ gzip:   5.16 kB
+dist/assets/AuthPage-CfTGxNPA.js   16.20 kB │ gzip:   5.77 kB
+dist/assets/index-CiDDxLDe.js     227.62 kB │ gzip:  59.20 kB
+dist/assets/index-y_iIGBni.js     484.49 kB │ gzip: 131.59 kB
+dist/assets/Studio-BC8HmOa7.js    910.79 kB │ gzip: 246.90 kB
+
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking:
+https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 15.65s
+
+> twistfuzz-bloom-studio@0.5.0-dev.6 test:e2e
+> tsx --tsconfig tsconfig.app.json tests/capture-auth-ui.tsx && playwright test
+
+Static MFA QA markup generated for v0.5.0-dev.6; not included in the application build.
+[WebServer] (node:12772) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:18196) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 17 tests using 1 worker
+
+(node:17404) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok  1 tests\browser\account-designs.spec.ts:3:1 › account designs remain gated and separate from working browser-local drafts (2.5s)
+  ok  2 tests\browser\auth.spec.ts:6:1 › unconfigured portals cannot be enabled by query parameters, local role data or an enrollment URL (1.4s)
+  ok  3 tests\browser\auth.spec.ts:18:1 › portal screenshots preserve Elegant Garden on desktop and mobile (2.8s)
+  ok  4 tests\browser\auth.spec.ts:30:1 › static MFA visual fixture fits desktop and mobile without adding an app login bypass (730ms)
+  ok  5 tests\browser\drafts.spec.ts:7:1 › save, reload, reopen, reset and remove preserve the complete preview design (2.4s)
+  ok  6 tests\browser\drafts.spec.ts:48:1 › invalid and over-limit storage never replaces the current bouquet (1.3s)
+  ok  7 tests\browser\drafts.spec.ts:63:1 › blocked browser storage leaves the builder usable with accessible feedback (1.1s)
+  ok  8 tests\browser\drafts.spec.ts:77:1 › quota failures keep the previous saved draft and current bouquet (1.0s)
+  ok  9 tests\browser\drafts.spec.ts:89:1 › stem controls enforce 30 and allow an empty bouquet draft (4.0s)
+  ok 10 tests\browser\drafts.spec.ts:106:1 › the bouquet remains editable when WebGL cannot initialize (954ms)
+  ok 11 tests\browser\drafts.spec.ts:121:1 › customer registration state cannot leak into privileged portals (894ms)
+  ok 12 tests\browser\drafts.spec.ts:135:1 › capture desktop and mobile studio evidence (2.0s)
+  ok 13 tests\browser\drafts.spec.ts:147:1 › another tab can update the stored draft without replacing current work (1.4s)
+  ok 14 tests\browser\routes.spec.ts:5:1 › public routes render, including direct links, redirects and unknown routes (1.5s)
+  ok 15 tests\browser\routes.spec.ts:26:1 › separate portals stay closed and privileged signup is absent (1.7s)
+  ok 16 tests\browser\routes.spec.ts:43:1 › all 24 preserved images decode successfully in a browser (869ms)
+  ok 17 tests\browser\routes.spec.ts:59:1 › mobile navigation and main layouts fit a 390px screen (1.2s)
+
+  17 passed (1.8m)

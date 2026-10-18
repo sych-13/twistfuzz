@@ -1,6 +1,20 @@
 # Development checkpoint
 
-Last updated: 2026-10-17 (Asia/Manila).
+Last updated: 2026-10-18 (Asia/Manila).
+
+## Current continuation — 0.5.0-dev.6
+
+This supersedes the historical dev.5 snapshot below. The owner requested leaving roughly 10% usage for later questions. Exact account usage is not visible: complete this delivery/checkpoint and stop before another large feature. Never promise automatic restart.
+
+- Supabase CLI login works. Secure Firebase runtime credential is stored in Supabase with readiness=false; only user read/update IAM permissions. Nine permission/storage/cleanup checks PASS. See `SERVER_CREDENTIALS.md`.
+- All three Edge Functions are deployed at version 2, disabled. Cloud bundling was fixed with automatic npm dependency resolution and a committed Deno lockfile. Source packaging: `scripts/package-edge-function.mjs`.
+- Dev.6 adds a five-second total request-body deadline, cancellation, byte/JSON validation before dependency initialization. Distributed rate limiting is still outstanding.
+- Full gate PASS: **127 Node/DOM/database, 4 Deno, 17 browser tests** (1.8m, no retries/failures), 3 Edge typechecks, build, 24 original assets. npm audit zero vulnerabilities; Deno audit no known vulnerabilities. **36 hosted denial/CORS/body checks PASS**. Evidence: `docs/qa/v0.5.0-dev.6-*`, `backend-deployment-*`, `backend-setup-server-secrets.json`.
+- First Admin email confirmed by owner and stored only in ignored `.env.owner.local`. No Admin account/role or factor recovery was provisioned in this continuation. Do not infer business Admin authority from CLI ownership.
+- Remaining: distributed abuse limits; enabled two-Customer/provider/role/audit/saved-design and concurrency integration; Google browser/email delivery; private first Admin enrollment/independent recovery; Staff provider reset controls; deployed credential rotation drill. Database pin stays NULL/integration false, client/server readiness false. V0.5 incomplete; no V0.6 yet.
+- Preserve Elegant Garden, all assets and portals; prices pending, lead times deferred, payments disabled. Deferred 910.79 kB Studio warning remains. Deno's legacy request-abort advisory is recorded; listener cleanup is tested.
+
+## Historical dev.5 snapshot — superseded above
 
 The owner explicitly requested continued autonomous local development, testing and fixes without a repeated “continue” instruction for each milestone. An active thread Goal records this objective. Usage limits and session availability still apply; automatic restart after quota refill is not guaranteed. Never waste tokens or generate busywork merely to consume the allowance.
 

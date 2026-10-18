@@ -4,6 +4,20 @@ import { createServerRuntime } from '../supabase/functions/_shared/runtime.ts';
 import { createCustomerProvisioningHandler } from '../supabase/functions/provision-customer/handler.ts';
 import { createSavedDesignHandler } from '../supabase/functions/saved-designs/handler.ts';
 import { createSavedDesignDependencies } from '../supabase/functions/saved-designs/runtime.ts';
+import { createJsonEndpoint } from '../supabase/functions/_shared/http.ts';
+
+Deno.test('Deno request deadline cancels a stalled stream without initializing credentials', async () => {
+  let cancelled = false;
+  let calls = 0;
+  const handler = createJsonEndpoint({ allowedOrigins: [], bodyReadTimeoutMs: 20,
+    dependencies: () => { calls++; return {}; }, handle: async () => ({}) });
+  const body = new ReadableStream<Uint8Array>({ cancel() { cancelled = true; return new Promise(() => {}); } });
+  const response = await handler(new Request('http://127.0.0.1/', { method: 'POST', body,
+    headers: { 'Content-Type': 'application/json', Authorization: 'Bearer a.b.c' } }));
+  if (response.status !== 408 || (await response.json()).error !== 'request_timeout' || !cancelled || body.locked || calls !== 0) {
+    throw new Error('Stalled stream did not fail closed and release its reader');
+  }
+});
 
 Deno.test('Deno HTTP runtime denies unconfigured auth without contacting external services', async () => {
   // This test has network permission for loopback only and uses no environment credentials.

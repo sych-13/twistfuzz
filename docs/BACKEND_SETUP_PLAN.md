@@ -1,6 +1,6 @@
 # Approved development backend setup
 
-Updated 2026-10-17 (Asia/Manila). The owner explicitly approved the named organization and free-tier Firebase/Supabase development setup, without paid upgrades. Both projects now exist. Do not request approval again for the same authorized setup.
+Updated 2026-10-18 (Asia/Manila). The owner explicitly approved the named organization and free-tier Firebase/Supabase development setup, without paid upgrades. Both projects now exist. Do not request approval again for the same authorized setup.
 
 ## Verified current state
 
@@ -13,9 +13,9 @@ Updated 2026-10-17 (Asia/Manila). The owner explicitly approved the named organi
 
 The owner saved Supabase's Firebase Third-Party Auth integration. A real intended-project Firebase JWT with `role: authenticated` returns HTTP 200 through PostgREST; tampering returns 401. The database still has no project pin and `integration_enabled=false`, no profiles/designs/audits, and NULL official prices. Public configuration is in ignored `.env.local`; client readiness is false and the Vercel preview build also forces it false.
 
-Actual validation: full local gate **114 Node/DOM/DB + 3 Deno HTTP + 17 browser tests**, three Edge entrypoint typechecks, build, 24 assets PASS; audit zero vulnerabilities. **14 real Firebase checks**, **4 native trust checks**, **8 public Data API denial checks** PASS. Hosted SQL ownership/revision/privilege/constraint checks PASS and rolled back. No server functions are deployed. Evidence and limits: `qa/backend-setup-results.md`.
+Backend-setup validation: full local gate **114 Node/DOM/DB + 3 Deno HTTP + 17 browser tests**, three Edge entrypoint typechecks, build, 24 assets PASS; audit zero vulnerabilities. **14 real Firebase checks**, **4 native trust checks**, **8 public Data API denial checks** PASS. Hosted SQL ownership/revision/privilege/constraint checks PASS and rolled back. All three server functions are now deployed with readiness false; **36 hosted denial/CORS checks** and **9 server credential checks** pass. Evidence: `qa/backend-deployment-http.json`, `qa/backend-setup-server-secrets.json`; earlier setup limits: `qa/backend-setup-results.md`.
 
-Next blockers: authenticated Supabase CLI/server secret management, deployed verified functions and abuse limits, first Admin private enrollment/recovery, Staff recovery controls, and full two-Customer/Google/email/provider integration. Do not enable readiness or advance V0.5 to V0.6 yet. Never request private credentials in chat or extract connector credentials. Normal Firebase CLI authorization works; the Firebase plugin is not required for these completed steps.
+Supabase CLI authentication and secure server secret setup are complete. The dedicated Firebase account has only user read/update permissions; its private credential is stored in Supabase, not Git. See `SERVER_CREDENTIALS.md`. Next blockers: distributed abuse limits, full deployed provider/SQL integration, first Admin private enrollment/recovery, Staff recovery controls, and full two-Customer/Google/email flows. The owner confirmed the initial Admin email; it is retained only in ignored `.env.owner.local`. Confirmation alone does not create an Admin role. Do not enable readiness or advance to V0.6 yet.
 
 ## Approved scope
 

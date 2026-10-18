@@ -1,5 +1,11 @@
 # Local validation
 
+## 0.5.0-dev.6 — 2026-10-18
+
+Full `npm.cmd run check` PASS: **127 Node/DOM/database tests, 4 Deno tests, 17 browser tests** (1.8m, no failures/retries), all 3 Edge typechecks, production build and 24 unchanged original assets. npm audit: zero vulnerabilities. Deno lock audit: no known vulnerabilities. **36 hosted denial/CORS/body-validation checks PASS** across the three disabled version-2 functions. Nine runtime credential permission/storage/cleanup checks also pass. See `qa/v0.5.0-dev.6-*`, `qa/backend-deployment-http.json` and `qa/backend-setup-server-secrets.json`.
+
+The change bounds total request-body read time to five seconds, counts actual bytes and rejects invalid JSON before dependency initialization. Node and Deno tests include stalled streams/cancellation. Hosted checks certify closed access and request boundaries, not successful account operations or distributed rate limiting. Admin enrollment/recovery and full Customer integration remain incomplete. No auth/payment activation. The deferred Studio warning and Deno legacy request-abort advisory remain; listener cleanup is tested. Historical results follow.
+
 ## Approved development backend setup follow-up - 2026-10-17
 
 Both free-tier development projects now exist, the generated secure foundation is applied, and native Firebase-to-Supabase trust is verified. With real public configuration and readiness false, `npm.cmd run check` passed **114 local + 3 Deno HTTP + 17 browser tests (34.8s)**, all three Edge entrypoint typechecks, build and 24 original assets. Audit: zero vulnerabilities. Additional **14 real Firebase**, **4 native trust** and **8 public Data API denial** checks pass; hosted SQL fixtures were rolled back and Firebase fixtures deleted. Application login/checkout remain disabled; operational functions, server secrets, full Customer flows, Admin enrollment/recovery and deployed abuse controls are incomplete. See [actual backend evidence and limits](qa/backend-setup-results.md). Earlier sections below describe their historical test runs.

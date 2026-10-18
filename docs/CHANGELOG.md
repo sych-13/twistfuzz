@@ -1,4 +1,12 @@
 # TWISTFUZZ Changelog
+## 0.5.0-dev.6 — bounded requests and disabled backend deployment (2026-10-18)
+
+- Completed Supabase CLI authentication and secure Firebase runtime credential storage: nine real permission/storage/cleanup checks PASS. Dedicated account has only user read/update permissions; no private credentials entered Git/client code.
+- Deployed all three Edge Functions, version 2, with readiness false. Fixed initial cloud bundling failure using automatic npm resolution and committed Deno lockfile. Existing cryptographic handler remains the authentication boundary.
+- Added five-second total body deadline, cancellation, declared/actual byte bounds and early JSON validation. A stalled cancellation promise cannot block the response. Added 13 Node regression tests and one Deno test; distributed rate limiting remains outstanding.
+- Full gate: **127 Node/DOM/database + 4 Deno + 17 browser tests PASS**, Edge typechecks, build, **24 original assets PASS**. Browser suite 1.8m, zero failures/retries. npm audit zero vulnerabilities; Deno audit no known vulnerabilities. **36 actual hosted denial/CORS/body checks PASS**. Evidence: `docs/qa/v0.5.0-dev.6-*`, `backend-deployment-*`.
+- Initial Admin email confirmed privately; enrollment/recovery incomplete. Elegant Garden/portals/assets preserved. V0.5 unreleased; auth/payments disabled, prices pending, lead times deferred. Deferred Studio 910.79 kB warning remains.
+
 ## V0.5-dev.5 follow-up: approved development backend setup (2026-10-17)
 - Owner approved free-tier setup in the named organization, without paid upgrades. Created Supabase `twistfuzz-dev` (`xoitxpoqejpprjyejgjv`, Singapore, Free, quote USD 0/month) and Firebase `TWISTFUZZ Dev` (`twistfuzz-dev-sych13`, billing disabled/no account). Existing Elegant Garden frontend, assets, portals and protection remain.
 - Registered the Firebase web app; configured email/password, Google, enumeration protection, exact development/stable domains and authenticator TOTP. SMS and anonymous sign-in remain disabled. Owner configured native Supabase Firebase trust; real JWT acceptance 200 and tampered-token denial 401 verified. No application readiness, privileged signup, paid upgrade or payment activation.
