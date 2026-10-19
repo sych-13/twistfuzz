@@ -1,0 +1,18 @@
+{
+  "checkedAt": "2026-10-19T08:59:14.916Z",
+  "applicationEnabled": false,
+  "checks": [
+    {
+      "name": "anonymous rate RPC denied",
+      "status": 401,
+      "code": "42501",
+      "result": "PASS"
+    },
+    {
+      "name": "private counters not exposed",
+      "status": 406,
+      "code": "PGRST106",
+      "result": "PASS"
+    }
+  ]
+}

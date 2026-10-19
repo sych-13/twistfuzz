@@ -26,6 +26,7 @@ async function token(uid='customer-a', changes={}) {
 }
 function dependencies(overrides={}) {
   return { auth: { projectId:fixtureProject, getKey,
+    consumeRateLimit: async () => ({ allowed: true, retry_after_seconds: 0 }),
     getAccount:async uid=>({uid,email:`${uid}@example.invalid`,emailVerified:true,disabled:false,validAfter:0}),
     getTrustedRole:async uid=>(await database.query('select role from profiles where firebase_uid=$1 and is_active',[uid])).rows[0]?.role,
     auditPrivilegedAccess:async()=>{}, ...overrides },
@@ -46,6 +47,18 @@ function dependencies(overrides={}) {
       return executeDesignCommand(client,uid,command);
     }) };
 }
+test('rate-limited saved-design requests cannot execute data operations', async () => {
+  let calls = 0;
+  const deps = dependencies({ consumeRateLimit: async scope => ({ allowed: scope === 'global', retry_after_seconds: scope === 'global' ? 0 : 20 }) });
+  deps.execute = async () => { calls++; throw Error(); };
+  const handler = createSavedDesignHandler({ allowedOrigins: [], dependencies: () => deps });
+  const response = await handler(new Request('https://edge.example.invalid/saved-designs', { method: 'POST',
+    headers: { Authorization: `Bearer ${await token()}`, 'Content-Type': 'application/json' }, body: '{"action":"list"}' }));
+  assert.equal(response.status, 429);
+  assert.equal(response.headers.get('retry-after'), '20');
+  assert.equal(calls, 0);
+});
+
 async function request(body, uid='customer-a', options={}) {
   const handler=createSavedDesignHandler({allowedOrigins:['http://127.0.0.1:5173'],dependencies:()=>options.dependencies??dependencies()});
   return handler(new Request('https://edge.example.invalid/saved-designs',{method:options.method??'POST',headers:{'Content-Type':'application/json',Authorization:`Bearer ${options.bearer??await token(uid)}`,Origin:options.origin??'http://127.0.0.1:5173'},body:options.method==='OPTIONS'?undefined:JSON.stringify(body)}));

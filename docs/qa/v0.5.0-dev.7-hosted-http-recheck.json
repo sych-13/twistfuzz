@@ -1,0 +1,20 @@
+{
+  "checkedAt": "2026-10-19T09:00:14.531Z",
+  "note": "Targeted rerun of one transport-timeout case; original 35 PASS / 1 timeout report retained.",
+  "checks": [
+    {
+      "attempt": 1,
+      "status": 415,
+      "error": "json_required",
+      "elapsedMs": 959,
+      "result": "PASS"
+    },
+    {
+      "attempt": 2,
+      "status": 415,
+      "error": "json_required",
+      "elapsedMs": 715,
+      "result": "PASS"
+    }
+  ]
+}

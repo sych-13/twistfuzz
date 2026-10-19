@@ -1,0 +1,115 @@
+{
+  "clientDate": "2026-10-19",
+  "projectId": "xoitxpoqejpprjyejgjv",
+  "migration": "20261019085735_request_rate_limits",
+  "migrationSha256": "d3049506764fb310f511ed42694467bc44bf861f8946bf0f4d11531724d4c955",
+  "sqlAssertions": {
+    "result": "PASS",
+    "checks": [
+      "closed gate",
+      "browser grants",
+      "global 600",
+      "identity 60",
+      "fixed expiry",
+      "identity isolation",
+      "hashed keys",
+      "reset",
+      "project pin",
+      "scope validation"
+    ]
+  },
+  "postRollback": {
+    "firebase_project_id": null,
+    "integration_enabled": false,
+    "rate_counters": 0,
+    "profiles": 0,
+    "designs": 0
+  },
+  "functions": [
+    {
+      "name": "resolve-role",
+      "id": "26cff43d-e9db-4b91-b2f0-d57933872b71",
+      "status": "ACTIVE",
+      "version": 3,
+      "verify_jwt": false,
+      "bundleSha256": "77c179f81ad24050d4110686ef22bae756d6977a3be9ad001cbb6e58150a84e6"
+    },
+    {
+      "name": "provision-customer",
+      "id": "3669a234-3533-47b9-9e3b-3e237d26abb0",
+      "status": "ACTIVE",
+      "version": 3,
+      "verify_jwt": false,
+      "bundleSha256": "ef539ea94de8ac7c0f9c94216a406e3a5e9904274b937809cebc83870f50ae67"
+    },
+    {
+      "name": "saved-designs",
+      "id": "47720365-6b42-4ad7-9ca3-670bc814b954",
+      "status": "ACTIVE",
+      "version": 3,
+      "verify_jwt": false,
+      "bundleSha256": "feda44f6b4894035c866a51147c039a6ae0424caeca92b68414779ba69078707"
+    }
+  ],
+  "securityAdvisors": {
+    "lints": [
+      {
+        "name": "rls_enabled_no_policy",
+        "title": "RLS Enabled No Policy",
+        "level": "INFO",
+        "facing": "EXTERNAL",
+        "categories": [
+          "SECURITY"
+        ],
+        "description": "Detects cases where row level security (RLS) has been enabled on a table but no RLS policies have been created.",
+        "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0008_rls_enabled_no_policy",
+        "count": 4,
+        "findings": [
+          {
+            "detail": "Table \\`app_private.request_allowances\\` has RLS enabled, but no policies exist",
+            "metadata": {
+              "name": "request_allowances",
+              "type": "table",
+              "schema": "app_private"
+            },
+            "observed_at": "2026-10-19T08:57:56.905Z"
+          },
+          {
+            "detail": "Table \\`public.audit_events\\` has RLS enabled, but no policies exist",
+            "metadata": {
+              "name": "audit_events",
+              "type": "table",
+              "schema": "public"
+            },
+            "observed_at": "2026-10-19T08:57:56.905Z"
+          },
+          {
+            "detail": "Table \\`public.flower_types\\` has RLS enabled, but no policies exist",
+            "metadata": {
+              "name": "flower_types",
+              "type": "table",
+              "schema": "public"
+            },
+            "observed_at": "2026-10-19T08:57:56.905Z"
+          },
+          {
+            "detail": "Table \\`public.products\\` has RLS enabled, but no policies exist",
+            "metadata": {
+              "name": "products",
+              "type": "table",
+              "schema": "public"
+            },
+            "observed_at": "2026-10-19T08:57:56.905Z"
+          }
+        ]
+      }
+    ]
+  },
+  "npmAudit": {"auditReportVersion":2,"vulnerabilities":{},"metadata":{"vulnerabilities":{"info":0,"low":0,"moderate":0,"high":0,"critical":0,"total":0},"dependencies":{"prod":156,"dev":324,"optional":161,"peer":19,"peerOptional":0,"total":490}}},
+  "denoAudit": "No known vulnerabilities found",
+  "limits": [
+    "No live enabled gateway 429 test",
+    "No simultaneous-session load validation",
+    "Admin enrollment/recovery and full Customer integration incomplete"
+  ]
+}

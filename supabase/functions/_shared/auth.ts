@@ -5,6 +5,7 @@ export type Role = 'customer' | 'staff' | 'admin';
 export class AccessError extends Error {
   status: number;
   code: string;
+  retryAfterSeconds?: number;
   constructor(status: number, code: string, message: string) {
     super(message); this.status = status; this.code = code;
   }
@@ -21,12 +22,39 @@ export type AuthDependencies = {
   projectId: string;
   getKey?: JWTVerifyGetKey;
   now?: () => Date;
+  consumeRateLimit: (scope: 'global' | 'identity', uid?: string) => Promise<unknown>;
   getAccount: (uid: string) => Promise<AccountSecurity | null>;
   getTrustedRole: (uid: string) => Promise<unknown>;
   auditPrivilegedAccess: (uid: string, role: 'staff' | 'admin') => Promise<void>;
 };
 const unauthorized = () => new AccessError(401, 'invalid_identity', 'Sign in again with a verified account.');
 const unavailable = () => new AccessError(503, 'identity_service_unavailable', 'Account verification is temporarily unavailable.');
+
+async function enforceRateLimit(dependencies: AuthDependencies, scope: 'global' | 'identity', uid?: string): Promise<void> {
+  let decision: unknown;
+  try { decision = await dependencies.consumeRateLimit(scope, uid); }
+  catch { throw new AccessError(503, 'rate_limit_unavailable', 'Request protection is temporarily unavailable.'); }
+  if (!decision || typeof decision !== 'object' || Array.isArray(decision)) {
+    throw new AccessError(503, 'rate_limit_unavailable', 'Request protection is temporarily unavailable.');
+  }
+  const { allowed, retry_after_seconds: retry } = decision as Record<string, unknown>;
+  if (allowed === true && retry === 0) return;
+  if (allowed !== false || !Number.isSafeInteger(retry) || (retry as number) < 1 || (retry as number) > 60) {
+    throw new AccessError(503, 'rate_limit_unavailable', 'Request protection is temporarily unavailable.');
+  }
+  const error = new AccessError(429, 'rate_limited', 'Too many requests. Please wait before trying again.');
+  error.retryAfterSeconds = retry as number;
+  throw error;
+}
+
+async function verifyLimitedIdentity(token: string, dependencies: AuthDependencies): Promise<VerifiedIdentity> {
+  // The global allowance bounds signature/provider work across every instance.
+  // Never use a decoded, unverified UID or a caller-provided IP as a bucket key.
+  await enforceRateLimit(dependencies, 'global');
+  const identity = await verifyFirebaseToken(token, dependencies);
+  await enforceRateLimit(dependencies, 'identity', identity.uid);
+  return identity;
+}
 
 export async function verifyFirebaseToken(token: string, dependencies: Pick<AuthDependencies, 'projectId' | 'getKey' | 'now'>): Promise<VerifiedIdentity> {
   if (!/^[a-z][a-z0-9-]{4,28}[a-z0-9]$/.test(dependencies.projectId)) throw unavailable();
@@ -71,7 +99,7 @@ function validateCurrentAccount(identity: VerifiedIdentity, account: AccountSecu
 }
 
 export async function verifyCurrentIdentity(token: string, dependencies: AuthDependencies): Promise<VerifiedIdentity> {
-  const identity = await verifyFirebaseToken(token, dependencies);
+  const identity = await verifyLimitedIdentity(token, dependencies);
   let account: AccountSecurity | null;
   try { account = await dependencies.getAccount(identity.uid); }
   catch { throw unavailable(); }
@@ -80,7 +108,7 @@ export async function verifyCurrentIdentity(token: string, dependencies: AuthDep
 }
 
 export async function authenticate(token: string, dependencies: AuthDependencies): Promise<{ identity: VerifiedIdentity; role: Role }> {
-  const identity = await verifyFirebaseToken(token, dependencies);
+  const identity = await verifyLimitedIdentity(token, dependencies);
   let account: AccountSecurity | null;
   let trustedRole: unknown;
   try { [account, trustedRole] = await Promise.all([dependencies.getAccount(identity.uid), dependencies.getTrustedRole(identity.uid)]); }

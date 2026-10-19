@@ -1,6 +1,6 @@
 # TWISTFUZZ Bloom Studio — Elegant Garden v0.4
 
-Current working package: **0.5.0-dev.6**, authentication/MFA and saved-design preparation with bounded server requests. The approved development backend is deployed with authentication disabled. Latest fully validated milestone: **v0.4**; V0.5 remains unreleased. See [progress in Filipino](docs/PROGRESS.md), [actual validation](docs/VALIDATION.md) and [continuation checkpoint](docs/DEVELOPMENT_CHECKPOINT.md).
+Current working package: **0.5.0-dev.7**, authentication/MFA and saved-design preparation with bounded requests and shared database rate limits. The approved development backend stays disabled until integration controls pass. Latest fully validated milestone: **v0.4**; V0.5 remains unreleased. See [progress in Filipino](docs/PROGRESS.md), [actual validation](docs/VALIDATION.md) and [continuation checkpoint](docs/DEVELOPMENT_CHECKPOINT.md).
 
 Continued from the existing v0.3 source. The approved Elegant Garden theme, official logo, campaign assets and original product references are preserved.
 
@@ -49,7 +49,7 @@ Browser tests use installed Microsoft Edge in headless mode, start a temporary l
 
 The owner approved free-tier development setup on 2026-10-17. Firebase `twistfuzz-dev-sych13` and Supabase `xoitxpoqejpprjyejgjv` now exist; provider configuration and native trust have been checked. The secure database foundation is applied, but application integration stays disabled. Public client values are in ignored `.env.local`; the repository supplies only `.env.example`. Never put service-role keys, Firebase service-account keys or other private keys in `VITE_*` variables or tracked files. Keep `VITE_AUTH_INTEGRATION_READY=false` until the remaining deployed-function, Admin enrollment/recovery and full integration controls pass. See [approved scope and remaining work](docs/BACKEND_SETUP_PLAN.md).
 
-**V0.5 is gated:** the three functions are deployed, with 36 hosted denial/CORS checks passing. Secure server credentials have nine verified permission/storage/cleanup checks. Remaining work includes distributed abuse limits, complete Customer saved-design flows, Google browser/email verification delivery, trusted initial Admin MFA enrollment/recovery and Staff recovery controls. Standalone provider, SQL and closed-endpoint checks do not certify these flows. See [server credential procedure](docs/SERVER_CREDENTIALS.md). No mock account access or privileged public signup is enabled.
+**V0.5 is gated:** the three functions are deployed, with 36 hosted denial/CORS checks passing. Secure server credentials have nine verified permission/storage/cleanup checks. Remaining work includes enabled rate-limit/concurrency validation, complete Customer saved-design flows, Google browser/email verification delivery, trusted initial Admin MFA enrollment/recovery and Staff recovery controls. Standalone provider, SQL and closed-endpoint checks do not certify these flows. See [server credential procedure](docs/SERVER_CREDENTIALS.md). No mock account access or privileged public signup is enabled.
 
 ## Business and deployment restrictions
 

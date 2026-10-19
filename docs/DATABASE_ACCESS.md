@@ -1,5 +1,7 @@
 # V0.5 development database access
 
+Dev.7 additionally applies `20261019085735_request_rate_limits.sql`: a private, forced-RLS counter table and service-only SECURITY INVOKER RPC with enabled-project checks. No browser grants or readiness changes. Local and rolled-back hosted SQL tests pass; see [rate-limit behavior](RATE_LIMITS.md) and [dev.7 evidence](qa/v0.5.0-dev.7-results.md).
+
 The owner-approved development project `xoitxpoqejpprjyejgjv` now runs `supabase/migrations/20261017091937_twistfuzz_secure_foundation.sql`. It combines the original foundation and reviewed access candidate without SQL logic changes. The byte-preserved original is archived at `supabase/schema-drafts/0001_foundation.sql`; `auth_design_access.sql` remains its historical review companion. Local tests load the generated migration, not the archived drafts. See `qa/backend-setup-results.md` for CLI generation, remote history alignment, hashes and actual hosted checks. Integration remains disabled.
 
 ## Trust and access
@@ -21,7 +23,7 @@ Ownership is enforced by both permissive and restrictive `USING`/`WITH CHECK` po
 
 ## Saved-design data
 
-The applied `custom_designs` additions are `name`, `updated_at` and a server-maintained `revision`. A trigger preserves identity and increments revisions on updates. The locally implemented `saved-designs` endpoint requires an expected revision for update/delete, includes owner identity in every data operation and reports a generic conflict for stale/inaccessible records. Its request-scoped public-key/user-token client retains RLS. The Studio account panel uses this contract. The schema has hosted SQL validation, but the endpoint is not deployed and its complete live flow is untested; see `supabase/functions/saved-designs/README.md`.
+The applied `custom_designs` additions are `name`, `updated_at` and a server-maintained `revision`. A trigger preserves identity and increments revisions on updates. The locally implemented `saved-designs` endpoint requires an expected revision for update/delete, includes owner identity in every data operation and reports a generic conflict for stale/inaccessible records. Its request-scoped public-key/user-token client retains RLS. The Studio account panel uses this contract. The schema has hosted SQL validation, the endpoint is deployed disabled and its complete live flow is untested; see `supabase/functions/saved-designs/README.md`.
 
 The database bouquet validator is deliberately strict: only flowers, wrapper, ribbon and the existing message-card option are stored. Its option parity is tested against all 390 combinations from the current frontend model. Later approved schema/options must update both validators and their compatibility rules. These records are saved designs, not orders or stock reservations, and do not assert price/inventory availability.
 

@@ -1,4 +1,12 @@
 # TWISTFUZZ Changelog
+## 0.5.0-dev.7 — shared backend request limits (2026-10-19)
+
+- Added service-only PostgreSQL allowances shared across all three functions/instances: 600 global attempts per 60-second window before JWT work, 60 per verified UID before provider/role/operation work. Database-owned time/capacity, atomic increments, bounded expiry cleanup and hashed identity keys; no paid cache/service.
+- Added mandatory limiter checks to role verification, Customer provisioning and saved designs. Missing/failed/malformed limiter results deny access; exhausted capacity returns 429 with bounded Retry-After. No automatic retries or in-memory fallback. See `RATE_LIMITS.md` for fixed-window/global-exhaustion limitations.
+- CLI-generated migration applied as `20261019085735_request_rate_limits`; all three functions deployed at version 3, still disabled. Hosted SQL capacity/expiry/isolation/grant checks pass and roll back; project pin NULL, integration false, zero counters/profiles/designs afterward. Two Data API privilege/schema checks PASS. Four intentional RLS/no-policy INFO findings; no WARN/ERROR.
+- Full gate: **145 Node/DOM/database + 5 Deno + 17 browser tests PASS**, three Edge typechecks, build and 24 original assets. Browser 102.1s, no failures/retries. npm/Deno audits: no known vulnerabilities. Hosted function suite: **35 PASS / 1 timeout**, then **2 targeted reruns PASS** for the exact failed case; both reports retained. Cause of the isolated timeout remains unconfirmed.
+- Evidence: `docs/qa/v0.5.0-dev.7-*`. Elegant Garden, original assets and portals unchanged. V0.5 incomplete: enabled provider/Customer/rate-limit/concurrency validation and Admin enrollment/recovery remain. Prices pending, lead times deferred, authentication/payments disabled.
+
 ## 0.5.0-dev.6 — bounded requests and disabled backend deployment (2026-10-18)
 
 - Completed Supabase CLI authentication and secure Firebase runtime credential storage: nine real permission/storage/cleanup checks PASS. Dedicated account has only user read/update permissions; no private credentials entered Git/client code.

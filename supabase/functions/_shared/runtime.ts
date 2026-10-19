@@ -5,6 +5,7 @@ import { AccessError } from './auth.ts';
 import type { AuthDependencies } from './auth.ts';
 import { ensureAuthenticatedTransportRole } from './customer.ts';
 import type { CustomerProvisioningDependencies } from './customer.ts';
+import { createRateLimitConsumer } from './rateLimit.ts';
 
 export type Environment = { get: (name: string) => string | undefined };
 const disabled = () => new AccessError(503, 'auth_setup_pending', 'Authentication setup and security validation are pending.');
@@ -41,6 +42,7 @@ export function createServerRuntime(environment: Environment): () => CustomerPro
     const database = createClient(supabaseUrl, serverKey, { auth: { persistSession: false, autoRefreshToken: false, detectSessionInUrl: false } });
     const dependencies: AuthDependencies = {
       projectId,
+      consumeRateLimit: createRateLimitConsumer(database, projectId),
       async getAccount(uid) {
         try {
           const user = await firebaseAuth.getUser(uid);

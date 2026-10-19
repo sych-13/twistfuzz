@@ -56,4 +56,4 @@ for (const endpoint of ['resolve-role', 'provision-customer', 'saved-designs']) 
   }
 }
 report.finishedAt = new Date().toISOString();
-writeFileSync('docs/qa/backend-deployment-http.json', `${JSON.stringify(report, null, 2)}\n`);
+writeFileSync(process.argv[2] ?? 'docs/qa/backend-deployment-http.json', `${JSON.stringify(report, null, 2)}\n`);

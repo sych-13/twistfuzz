@@ -1,6 +1,6 @@
 # Approved development backend setup
 
-Updated 2026-10-18 (Asia/Manila). The owner explicitly approved the named organization and free-tier Firebase/Supabase development setup, without paid upgrades. Both projects now exist. Do not request approval again for the same authorized setup.
+Updated 2026-10-19 (Asia/Manila). The owner explicitly approved the named organization and free-tier Firebase/Supabase development setup, without paid upgrades. Both projects now exist. Do not request approval again for the same authorized setup.
 
 ## Verified current state
 
@@ -15,7 +15,7 @@ The owner saved Supabase's Firebase Third-Party Auth integration. A real intende
 
 Backend-setup validation: full local gate **114 Node/DOM/DB + 3 Deno HTTP + 17 browser tests**, three Edge entrypoint typechecks, build, 24 assets PASS; audit zero vulnerabilities. **14 real Firebase checks**, **4 native trust checks**, **8 public Data API denial checks** PASS. Hosted SQL ownership/revision/privilege/constraint checks PASS and rolled back. All three server functions are now deployed with readiness false; **36 hosted denial/CORS checks** and **9 server credential checks** pass. Evidence: `qa/backend-deployment-http.json`, `qa/backend-setup-server-secrets.json`; earlier setup limits: `qa/backend-setup-results.md`.
 
-Supabase CLI authentication and secure server secret setup are complete. The dedicated Firebase account has only user read/update permissions; its private credential is stored in Supabase, not Git. See `SERVER_CREDENTIALS.md`. Next blockers: distributed abuse limits, full deployed provider/SQL integration, first Admin private enrollment/recovery, Staff recovery controls, and full two-Customer/Google/email flows. The owner confirmed the initial Admin email; it is retained only in ignored `.env.owner.local`. Confirmation alone does not create an Admin role. Do not enable readiness or advance to V0.6 yet.
+Supabase CLI authentication and secure server secret setup are complete. The dedicated Firebase account has only user read/update permissions; its private credential is stored in Supabase, not Git. See `SERVER_CREDENTIALS.md`. Dev.7 implements database-backed global and verified-UID rate limits; see `RATE_LIMITS.md` and the latest checkpoint for actual tests/deployment. Remaining gates: enabled rate-limit/concurrency/load validation, full provider/SQL/Customer integration, first Admin private enrollment/recovery, Staff recovery controls and Google/email flows. Owner email is retained only in ignored `.env.owner.local`; confirmation alone does not create an Admin role. Do not enable readiness or advance to V0.6 yet.
 
 ## Approved scope
 

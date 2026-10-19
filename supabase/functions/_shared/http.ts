@@ -90,7 +90,13 @@ export function createJsonEndpoint<Dependencies>(options: EndpointOptions<Depend
       const dependencies = options.dependencies();
       return respond(200, await options.handle(body, authorization.slice(7), dependencies));
     } catch (error) {
-      if (error instanceof AccessError) return respond(error.status, { error: error.code, message: error.message });
+      if (error instanceof AccessError) {
+        if (error.status === 429 && Number.isSafeInteger(error.retryAfterSeconds) && error.retryAfterSeconds! >= 1 && error.retryAfterSeconds! <= 60) {
+          headers.set('Retry-After', String(error.retryAfterSeconds));
+          headers.set('Access-Control-Expose-Headers', 'Retry-After');
+        }
+        return respond(error.status, { error: error.code, message: error.message });
+      }
       return respond(503, { error: 'identity_service_unavailable', message: 'Account verification is temporarily unavailable.' });
     }
   };

@@ -1,0 +1,260 @@
+{
+  "startedAt": "2026-10-19T08:58:47.257Z",
+  "projectId": "xoitxpoqejpprjyejgjv",
+  "applicationEnabled": false,
+  "checks": [
+    {
+      "endpoint": "resolve-role",
+      "name": "missing identity denied",
+      "expectedStatus": 401,
+      "status": 401,
+      "result": "PASS"
+    },
+    {
+      "endpoint": "resolve-role",
+      "name": "malformed identity denied",
+      "expectedStatus": 401,
+      "status": 401,
+      "result": "PASS"
+    },
+    {
+      "endpoint": "resolve-role",
+      "name": "untrusted origin denied",
+      "expectedStatus": 403,
+      "status": 403,
+      "result": "PASS"
+    },
+    {
+      "endpoint": "resolve-role",
+      "name": "lookalike origin denied",
+      "expectedStatus": 403,
+      "status": 403,
+      "result": "PASS"
+    },
+    {
+      "endpoint": "resolve-role",
+      "name": "opaque origin denied",
+      "expectedStatus": 403,
+      "status": 403,
+      "result": "PASS"
+    },
+    {
+      "endpoint": "resolve-role",
+      "name": "GET denied",
+      "expectedStatus": 405,
+      "status": 405,
+      "result": "PASS"
+    },
+    {
+      "endpoint": "resolve-role",
+      "name": "allowed preflight",
+      "expectedStatus": 204,
+      "status": 204,
+      "result": "PASS"
+    },
+    {
+      "endpoint": "resolve-role",
+      "name": "syntactic token cannot pass disabled gate",
+      "expectedStatus": 503,
+      "status": 503,
+      "result": "PASS"
+    },
+    {
+      "endpoint": "resolve-role",
+      "name": "originless request cannot pass disabled gate",
+      "expectedStatus": 503,
+      "status": 503,
+      "result": "PASS"
+    },
+    {
+      "endpoint": "resolve-role",
+      "name": "unsupported body type rejected before runtime",
+      "expectedStatus": 415,
+      "result": "FAIL",
+      "reason": "The operation was aborted due to timeout"
+    },
+    {
+      "endpoint": "resolve-role",
+      "name": "malformed JSON rejected before runtime",
+      "expectedStatus": 400,
+      "status": 400,
+      "result": "PASS"
+    },
+    {
+      "endpoint": "resolve-role",
+      "name": "oversized body rejected before runtime",
+      "expectedStatus": 413,
+      "status": 413,
+      "result": "PASS"
+    },
+    {
+      "endpoint": "provision-customer",
+      "name": "missing identity denied",
+      "expectedStatus": 401,
+      "status": 401,
+      "result": "PASS"
+    },
+    {
+      "endpoint": "provision-customer",
+      "name": "malformed identity denied",
+      "expectedStatus": 401,
+      "status": 401,
+      "result": "PASS"
+    },
+    {
+      "endpoint": "provision-customer",
+      "name": "untrusted origin denied",
+      "expectedStatus": 403,
+      "status": 403,
+      "result": "PASS"
+    },
+    {
+      "endpoint": "provision-customer",
+      "name": "lookalike origin denied",
+      "expectedStatus": 403,
+      "status": 403,
+      "result": "PASS"
+    },
+    {
+      "endpoint": "provision-customer",
+      "name": "opaque origin denied",
+      "expectedStatus": 403,
+      "status": 403,
+      "result": "PASS"
+    },
+    {
+      "endpoint": "provision-customer",
+      "name": "GET denied",
+      "expectedStatus": 405,
+      "status": 405,
+      "result": "PASS"
+    },
+    {
+      "endpoint": "provision-customer",
+      "name": "allowed preflight",
+      "expectedStatus": 204,
+      "status": 204,
+      "result": "PASS"
+    },
+    {
+      "endpoint": "provision-customer",
+      "name": "syntactic token cannot pass disabled gate",
+      "expectedStatus": 503,
+      "status": 503,
+      "result": "PASS"
+    },
+    {
+      "endpoint": "provision-customer",
+      "name": "originless request cannot pass disabled gate",
+      "expectedStatus": 503,
+      "status": 503,
+      "result": "PASS"
+    },
+    {
+      "endpoint": "provision-customer",
+      "name": "unsupported body type rejected before runtime",
+      "expectedStatus": 415,
+      "status": 415,
+      "result": "PASS"
+    },
+    {
+      "endpoint": "provision-customer",
+      "name": "malformed JSON rejected before runtime",
+      "expectedStatus": 400,
+      "status": 400,
+      "result": "PASS"
+    },
+    {
+      "endpoint": "provision-customer",
+      "name": "oversized body rejected before runtime",
+      "expectedStatus": 413,
+      "status": 413,
+      "result": "PASS"
+    },
+    {
+      "endpoint": "saved-designs",
+      "name": "missing identity denied",
+      "expectedStatus": 401,
+      "status": 401,
+      "result": "PASS"
+    },
+    {
+      "endpoint": "saved-designs",
+      "name": "malformed identity denied",
+      "expectedStatus": 401,
+      "status": 401,
+      "result": "PASS"
+    },
+    {
+      "endpoint": "saved-designs",
+      "name": "untrusted origin denied",
+      "expectedStatus": 403,
+      "status": 403,
+      "result": "PASS"
+    },
+    {
+      "endpoint": "saved-designs",
+      "name": "lookalike origin denied",
+      "expectedStatus": 403,
+      "status": 403,
+      "result": "PASS"
+    },
+    {
+      "endpoint": "saved-designs",
+      "name": "opaque origin denied",
+      "expectedStatus": 403,
+      "status": 403,
+      "result": "PASS"
+    },
+    {
+      "endpoint": "saved-designs",
+      "name": "GET denied",
+      "expectedStatus": 405,
+      "status": 405,
+      "result": "PASS"
+    },
+    {
+      "endpoint": "saved-designs",
+      "name": "allowed preflight",
+      "expectedStatus": 204,
+      "status": 204,
+      "result": "PASS"
+    },
+    {
+      "endpoint": "saved-designs",
+      "name": "syntactic token cannot pass disabled gate",
+      "expectedStatus": 503,
+      "status": 503,
+      "result": "PASS"
+    },
+    {
+      "endpoint": "saved-designs",
+      "name": "originless request cannot pass disabled gate",
+      "expectedStatus": 503,
+      "status": 503,
+      "result": "PASS"
+    },
+    {
+      "endpoint": "saved-designs",
+      "name": "unsupported body type rejected before runtime",
+      "expectedStatus": 415,
+      "status": 415,
+      "result": "PASS"
+    },
+    {
+      "endpoint": "saved-designs",
+      "name": "malformed JSON rejected before runtime",
+      "expectedStatus": 400,
+      "status": 400,
+      "result": "PASS"
+    },
+    {
+      "endpoint": "saved-designs",
+      "name": "oversized body rejected before runtime",
+      "expectedStatus": 413,
+      "status": 413,
+      "result": "PASS"
+    }
+  ],
+  "finishedAt": "2026-10-19T08:59:46.897Z"
+}

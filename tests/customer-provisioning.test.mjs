@@ -32,6 +32,7 @@ function dependencies() {
   return {
     auth: {
       projectId: fixtureProject, getKey, now: () => new Date(seconds * 1000),
+      consumeRateLimit: async () => ({ allowed: true, retry_after_seconds: 0 }),
       getAccount: async uid => accounts.has(uid) ? accounts.get(uid) : { uid, email: `${uid}@example.invalid`, emailVerified: true, disabled: false, validAfter: 0 },
       getTrustedRole: async uid => (await asRole(database, 'service_role', {}, db => db.query('select * from public.resolve_business_role($1,$2)', [uid, fixtureProject]))).rows[0]?.role ?? null,
       auditPrivilegedAccess: async () => {},
@@ -60,6 +61,19 @@ function request(bearer, body = {}) {
     headers: { Authorization: `Bearer ${bearer}`, Origin: 'http://127.0.0.1:5173', 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
 }
 const handler = (value = dependencies()) => createCustomerProvisioningHandler({ allowedOrigins: ['http://127.0.0.1:5173'], dependencies: () => value });
+
+test('rate-limited onboarding cannot create a profile, write claims or audit a provisioning', async () => {
+  const deps = dependencies();
+  let writes = 0;
+  deps.auth.consumeRateLimit = async scope => ({ allowed: scope === 'global', retry_after_seconds: scope === 'global' ? 0 : 15 });
+  deps.provisionCustomer = async () => { writes++; throw Error(); };
+  deps.ensureTransportRole = async () => { writes++; };
+  const response = await handler(deps)(request(await token('rate-limited-customer')));
+  assert.equal(response.status, 429);
+  assert.equal(response.headers.get('retry-after'), '15');
+  assert.equal(writes, 0);
+  assert.equal((await database.query("select count(*)::int as count from profiles where firebase_uid='rate-limited-customer'")).rows[0].count, 0);
+});
 
 test('verified onboarding derives its Customer identity from the signed token and audits real SQL creation', async () => {
   const uid = 'verified-new-customer';

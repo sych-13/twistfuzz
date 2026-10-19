@@ -1,5 +1,9 @@
 # Local validation
 
+## 0.5.0-dev.7 — 2026-10-19
+
+Full gate: **145 Node/DOM/database, 5 Deno and 17 browser tests PASS**, Edge typechecks/build and 24 original assets PASS. Browser duration 102.1s, no retries/failures. npm/Deno audits report no known vulnerabilities. Applied migration and disabled version-3 functions have hosted SQL and two Data API denial checks. The 36-case hosted function run had 35 PASS/1 timeout; two targeted reruns of that exact request passed. Original failure is retained; no enabled full-flow or concurrency claim is made. See [dev.7 actual results and limits](qa/v0.5.0-dev.7-results.md).
+
 ## 0.5.0-dev.6 — 2026-10-18
 
 Full `npm.cmd run check` PASS: **127 Node/DOM/database tests, 4 Deno tests, 17 browser tests** (1.8m, no failures/retries), all 3 Edge typechecks, production build and 24 unchanged original assets. npm audit: zero vulnerabilities. Deno lock audit: no known vulnerabilities. **36 hosted denial/CORS/body-validation checks PASS** across the three disabled version-2 functions. Nine runtime credential permission/storage/cleanup checks also pass. See `qa/v0.5.0-dev.6-*`, `qa/backend-deployment-http.json` and `qa/backend-setup-server-secrets.json`.

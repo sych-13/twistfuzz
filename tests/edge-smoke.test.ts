@@ -6,6 +6,24 @@ import { createSavedDesignHandler } from '../supabase/functions/saved-designs/ha
 import { createSavedDesignDependencies } from '../supabase/functions/saved-designs/runtime.ts';
 import { createJsonEndpoint } from '../supabase/functions/_shared/http.ts';
 
+Deno.test('Deno HTTP global rate rejection returns Retry-After before identity services', async () => {
+  const controller = new AbortController();
+  const fail = async (): Promise<never> => { throw new Error('Identity service must not be called'); };
+  const handler = createRoleHandler({ allowedOrigins: ['http://127.0.0.1:5173'], dependencies: () => ({
+    projectId: 'twistfuzz-local-tests', consumeRateLimit: async () => ({ allowed: false, retry_after_seconds: 30 }),
+    getAccount: fail, getTrustedRole: fail, auditPrivilegedAccess: fail,
+  }) });
+  const server = Deno.serve({ hostname: '127.0.0.1', port: 0, signal: controller.signal, onListen: () => {} }, handler);
+  try {
+    const response = await fetch(`http://127.0.0.1:${server.addr.port}/`, { method: 'POST', headers: {
+      'Content-Type': 'application/json', Authorization: 'Bearer a.b.c', Origin: 'http://127.0.0.1:5173',
+    }, body: '{}' });
+    if (response.status !== 429 || response.headers.get('retry-after') !== '30' || (await response.json()).error !== 'rate_limited') {
+      throw new Error('Rate-limited request did not return the required HTTP boundary');
+    }
+  } finally { controller.abort(); await server.finished; }
+});
+
 Deno.test('Deno request deadline cancels a stalled stream without initializing credentials', async () => {
   let cancelled = false;
   let calls = 0;

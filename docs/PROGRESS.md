@@ -1,5 +1,13 @@
 # Progress ng TWISTFUZZ
 
+## Pinakabagong update — 19 October 2026, 0.5.0-dev.7
+
+May shared database rate limits na ang role verification, Customer onboarding at saved designs. Hindi tutuloy ang account lookup o data operation kapag lampas sa limit o pumalya ang protection service. Applied na ang migration at deployed ang tatlong backend function sa disabled state.
+
+Pumasa ang **145 local tests, 5 Deno tests, 17 browser tests, build at 24 original-image checks**. Pumasa rin ang aktuwal na database checks at dalawang API access-denial checks. Sa hosted function tests, 35 ang pumasa at isa ang nag-timeout; dalawang ulit na targeted retest ang pumasa. Nakatala ang parehong resulta sa [test report](qa/v0.5.0-dev.7-results.md).
+
+Ginagawa pa ang V0.5. Kailangan pa ang Admin MFA/recovery at buong Customer/provider/concurrency validation bago buksan ang login. Ang website ay nasa [stable preview](https://twistfuzz-bloom-preview.vercel.app); backend security ang update na ito kaya pareho pa rin ang design. Nasa [checkpoint](DEVELOPMENT_CHECKPOINT.md) ang susunod na trabaho. Mas lumang updates ang nasa ibaba.
+
 Na-update: 18 October 2026. Package: **0.5.0-dev.6**. Huling kumpletong milestone: **V0.4**. Ginagawa pa ang V0.5; hindi pa live ang authentication.
 
 **Pinakabagong progreso:** deployed na ang tatlong backend function sa disabled state at naka-store nang ligtas ang server credentials. May request timeout at mas mahigpit na body validation. Pumasa ang **127 local, 4 Deno, 17 browser, 36 hosted checks**, build at 24 original-image checks; npm/Deno audits walang kilalang vulnerabilities. Nakumpirma na ang Admin email ngunit kailangan pa ang private MFA enrollment/recovery, full Customer flow at distributed rate limits. Tingnan ang [latest checkpoint](DEVELOPMENT_CHECKPOINT.md). Ang mas lumang detalye sa ibaba ay dev.5 snapshot.

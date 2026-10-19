@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { createLocalJWKSet, exportJWK, generateKeyPair, SignJWT } from 'jose';
-import { AccessError, authenticate, verifyFirebaseToken } from '../supabase/functions/_shared/auth.ts';
+import { AccessError, authenticate, verifyCurrentIdentity, verifyFirebaseToken } from '../supabase/functions/_shared/auth.ts';
 import { createDependencies, readAllowedOrigins } from '../supabase/functions/_shared/runtime.ts';
 import { createRoleHandler } from '../supabase/functions/resolve-role/handler.ts';
 import { authenticationConfiguration, isPublicSupabaseKey } from '../src/services/authConfiguration.ts';
@@ -24,6 +24,7 @@ async function sign(changes = {}, header = {}) {
 }
 function dependencies(overrides = {}) {
   return { projectId, getKey, now,
+    consumeRateLimit: async () => ({ allowed: true, retry_after_seconds: 0 }),
     getAccount: async uid => ({ uid, email: 'fixture@example.invalid', emailVerified: true, disabled: false, validAfter: 0 }),
     getTrustedRole: async () => 'customer', auditPrivilegedAccess: async () => {}, ...overrides };
 }
@@ -34,6 +35,68 @@ function request(token, options = {}) {
   });
 }
 const handler = (deps = dependencies()) => createRoleHandler({ allowedOrigins: ['http://127.0.0.1:5173'], dependencies: () => deps });
+
+test('global limiter denial prevents signature work and all provider/account reads', async () => {
+  let work = 0;
+  const deps = dependencies({ consumeRateLimit: async scope => {
+    assert.equal(scope, 'global'); return { allowed: false, retry_after_seconds: 60 };
+  }, getKey: async () => { work++; throw Error(); }, getAccount: async () => { work++; return null; } });
+  for (const verify of [authenticate, verifyCurrentIdentity]) {
+    await assert.rejects(verify(await sign(), deps), accessError(429, 'rate_limited'));
+  }
+  assert.equal(work, 0);
+});
+
+test('identity allowance uses only the cryptographically verified UID before current-account reads', async () => {
+  const calls = [];
+  let reads = 0;
+  const deps = dependencies({ consumeRateLimit: async (scope, uid) => {
+    calls.push([scope, uid]); return { allowed: scope === 'global', retry_after_seconds: scope === 'global' ? 0 : 12 };
+  }, getAccount: async () => { reads++; return null; }, getTrustedRole: async () => { reads++; return 'admin'; } });
+  await assert.rejects(authenticate(await sign({ sub: 'signed-uid', user_metadata: { uid: 'attacker-uid' } }), deps), accessError(429));
+  assert.deepEqual(calls, [['global', undefined], ['identity', 'signed-uid']]);
+  assert.equal(reads, 0);
+});
+
+test('invalid JWTs consume only global allowance and cannot create identity buckets', async () => {
+  const scopes = [];
+  const deps = dependencies({ consumeRateLimit: async scope => { scopes.push(scope); return { allowed: true, retry_after_seconds: 0 }; } });
+  await assert.rejects(authenticate(await sign({ exp: seconds - 1 }), deps), accessError(401));
+  await assert.rejects(authenticate('a.b.c', deps), accessError(401));
+  assert.deepEqual(scopes, ['global', 'global']);
+});
+
+test('missing, failed or malformed limiter results never fall back to account access', async () => {
+  let reads = 0;
+  const token = await sign();
+  const invalid = [null, [], {}, { allowed: 'true', retry_after_seconds: 0 }, { allowed: true, retry_after_seconds: 1 },
+    { allowed: false, retry_after_seconds: 0 }, { allowed: false, retry_after_seconds: 61 }, { allowed: false, retry_after_seconds: 1.5 }];
+  for (const consumer of [undefined, async () => { throw Error('private database details'); }, ...invalid.map(value => async () => value)]) {
+    for (const verify of [authenticate, verifyCurrentIdentity]) {
+      await assert.rejects(verify(token, dependencies({ consumeRateLimit: consumer, getAccount: async () => { reads++; return null; } })), accessError(503, 'rate_limit_unavailable'));
+    }
+  }
+  assert.equal(reads, 0);
+});
+
+test('HTTP rate denial returns bounded Retry-After with exact CORS and no cache', async () => {
+  const response = await handler(dependencies({ consumeRateLimit: async () => ({ allowed: false, retry_after_seconds: 17 }) }))(request(await sign()));
+  assert.equal(response.status, 429);
+  assert.equal(response.headers.get('retry-after'), '17');
+  assert.equal(response.headers.get('access-control-expose-headers'), 'Retry-After');
+  assert.equal(response.headers.get('access-control-allow-origin'), 'http://127.0.0.1:5173');
+  assert.equal(response.headers.get('cache-control'), 'no-store');
+  assert.equal((await response.json()).error, 'rate_limited');
+});
+
+test('HTTP limiter failures redact provider details and do not advertise a false retry delay', async () => {
+  const response = await handler(dependencies({ consumeRateLimit: async () => { throw Error('private provider details'); } }))(request(await sign()));
+  assert.equal(response.status, 503);
+  assert.equal(response.headers.get('retry-after'), null);
+  const text = await response.text();
+  assert.equal(text.includes('private provider details'), false);
+  assert.equal(JSON.parse(text).error, 'rate_limit_unavailable');
+});
 
 test('valid RSA signed Firebase-shaped token is verified before trusted account/role lookup', async () => {
   const token = await sign();
